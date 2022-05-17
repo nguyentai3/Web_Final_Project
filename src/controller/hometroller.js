@@ -87,6 +87,9 @@ let deleteuserbyid = async (req,res)=>{
      
 }
 
+let handlelogin = (req,res)=>{
+    
+}
 
 module.exports = {
     //key,value
@@ -97,5 +100,6 @@ module.exports = {
     displayalluser:displayalluser,
     checkuserbyid:checkuserbyid,
     updateinformationofuser:updateinformationofuser,
-    deleteuserbyid:deleteuserbyid
+    deleteuserbyid:deleteuserbyid,
+    handlelogin:handlelogin
 }

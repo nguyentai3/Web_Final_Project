@@ -2,14 +2,15 @@ import express from"express"
  import usercontroller from "../controller/usercontroller"
 import homepage from "../controller/hometroller"
 import auth from'../midlewave/auth'
+import ordercontroller from '../controller/ordercontroller'
+import admincontroller from '../controller/admincontroller'
 let router = express.Router();
 
 let initwebroute = (app) =>{
-    router.get("/", homepage.gethomepage)
-
+ 
     router.get("/personalpage",homepage.getpersonalpage)
     
-    router.get("/crud",homepage.crud)
+    router.get("/crud/create",homepage.crud)
 
     router.post("/crud/post",homepage.crudprocesssingin)
 
@@ -21,13 +22,31 @@ let initwebroute = (app) =>{
     ///crud/delete?id=<%= datatable[i].id%>
     router.get("/crud/delete",homepage.deleteuserbyid)
 
-    router.post("/api/login",usercontroller.handlelogin)
+    router.get("/api/login",usercontroller.loginpage)
+    
+    router.post("/api/handlelogin",usercontroller.handlelogin)
+
     router.post("/api/signin",usercontroller.handlesignin)
    
+    router.get('/api/Shopping',ordercontroller.shoppingpage)
 
-    router.get("/api/auth",auth.authenloginuser,(req,res)=>{
-        res.json({message:"Roleid"})
-    })
+    router.post("/api/admin/crudproduct/addnewproduct",auth.authenloginadmin,admincontroller.addnewproduct)
+
+
+    router.post("/api/admin/crudproduct/updateproduct",auth.authenloginadmin,admincontroller.updateProduct)
+ 
+    router.get('/api/Shopping',ordercontroller.shoppingpage)
+
+    
+    router.post("/api/shopping",ordercontroller.Allitems)
+
+    router.post("/api/shopping/cart",auth.authenloginuser,ordercontroller.cartofuser)
+
+    router.post("/api/shopping/addtocart",auth.authenloginuser,ordercontroller.allProductInCart)
+    
+    router.post("/api/addproducttocart",auth.authenloginuser,ordercontroller.addproducttocart)
+
+    router.get("/login",homepage.handlelogin)
 
     return app.use("/",router);
 }

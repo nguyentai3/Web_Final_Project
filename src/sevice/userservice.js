@@ -24,8 +24,6 @@ let handleuserlogin =(email,password)=>{
                         userdata.email=email
                         delete user.password
                         userdata.user=user
-                        
-                      
                          
                         
                         resovle(userdata)
@@ -53,7 +51,21 @@ let handleuserlogin =(email,password)=>{
 
 }
 
- 
+let getuserbyid = async (id) =>{
+    return new Promise(async (resolve,reject)=>{
+        try {
+            let user = await db.User.findOne({
+                where:{id:id}
+            })
+            resolve(user)
+        } catch(e) {
+            reject(e)
+        }
+        
+
+    })
+} 
+
 
 let checkuseremail = (email)=>{
     return new Promise(async(resolve,reject)=>{
@@ -78,5 +90,6 @@ let checkuseremail = (email)=>{
 
 module.exports= {
     handleuserlogin:handleuserlogin,
-    checkuseremail:checkuseremail
+    checkuseremail:checkuseremail,
+    getuserbyid:getuserbyid
 }

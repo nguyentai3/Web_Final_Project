@@ -11,9 +11,9 @@ require('dotenv').config()
 let app = express()
 
 
-app.use(cors({origin:true}))
+app.use(cors())
 app.use(cookieparser())
-
+app.options('/', cors())
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({extended:true}))
 

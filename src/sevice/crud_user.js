@@ -4,6 +4,7 @@ import db from"../models/index";
  var salt =bcrypt.genSalt(100)
  let createuser = async (data)=>{
      return new Promise(async(resovle,reject)=>{
+
         try {
             let password1 = await hashpassword(data.password)
             let newuser= await db.User.create({

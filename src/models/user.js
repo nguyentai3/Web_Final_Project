@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+import product from'../models/product'
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -29,5 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+
+  
+
+
   return User;
 };
