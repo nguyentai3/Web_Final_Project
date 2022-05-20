@@ -135,7 +135,7 @@ let deleteuserbyid = async(userid)=> {
     }
 }
  module.exports = {
-     createuser:createuser,
+    createuser:createuser,
      getalluser:getalluser,
      updateuserbyid:updateuserbyid,
      getuserbyid:getuserbyid,

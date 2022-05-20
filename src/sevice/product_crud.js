@@ -1,5 +1,7 @@
 import { reject } from "bcrypt/promises";
 import db from"../models/index";
+const { QueryTypes } = require('sequelize');
+const { Op } = require("sequelize");
 
 let getAllProduct = async () =>{
     return new Promise(async(resolve,reject)=>{
@@ -60,32 +62,68 @@ let updateproduct = async(newproduct)=>{
     })
 }
 
-let findProductbuId =   (idproduct)=>{
+let findProductbyId =   (idproduct)=>{
     
-        try {
-          
-            let product  =   db.product.findAll({
-                where :{
-                    id:idproduct
-                }
-            })
-          
-            return product
-        } catch(e) {
-            return e
-        }
-
-
-        
+    try {
+      
+        let product  =   db.product.findOne({
+            where :{
+                id:idproduct
+            }
+        })
+      
+        return product
+    } catch(e) {
+        return e
+    }
 
 
     
+
+
+
 }
+
+let findProductbyName =  async (name)=>{
+    return new Promise(async(resovle,reject)=>{
+        try {
+           if (name) {
+            let product1  = await   db.product.findAll( {
+                where:{
+                    nameproduct: {
+                        // *name* trong query 
+                        [Op.regexp]:name
+                    }
+                }
+            });
+            
+            resovle(product1)
+           } else {
+            let product1  = await   db.product.findAll();
+            
+            resovle(product1)
+           }
+        
+            
+        } catch(e) {
+            reject(e)
+        }
+    })
+   
+
+
+    
+
+
+
+}
+
 
 
 module.exports ={
     updateproduct:updateproduct,
     getAllProduct:getAllProduct,
     addnewproduct:createpruduct,
-    findProductbuId:findProductbuId
+    findProductbyId:findProductbyId,
+    findProductbyName:findProductbyName
 }

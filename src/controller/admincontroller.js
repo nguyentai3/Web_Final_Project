@@ -1,5 +1,9 @@
  
 import producCrud from '../sevice/product_crud'
+
+
+
+
 let addnewproduct = async(req,res)=>{
     let productlist = await producCrud.addnewproduct(req.body)
     
@@ -25,6 +29,11 @@ let updateProduct = async (req,res)=>{
     })
 
 
+}
+
+
+let allproduct = async(req,res)=>{
+    
 }
 
 module.exports={

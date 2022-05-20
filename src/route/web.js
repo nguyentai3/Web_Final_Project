@@ -38,13 +38,26 @@ let initwebroute = (app) =>{
     router.get('/api/Shopping',ordercontroller.shoppingpage)
 
     
+  
+
     router.post("/api/shopping",ordercontroller.Allitems)
 
     router.post("/api/shopping/cart",auth.authenloginuser,ordercontroller.cartofuser)
 
     router.post("/api/shopping/addtocart",auth.authenloginuser,ordercontroller.allProductInCart)
     
+    router.get("/api/shopping/cartofuserbyid",ordercontroller.cartofuserbyid)
+    
+
+    
+   
+    router.post("/api/searchproductbyname",ordercontroller.search)
+
     router.post("/api/addproducttocart",auth.authenloginuser,ordercontroller.addproducttocart)
+
+    router.post("/api/crud/signin",usercontroller.handlesignin)
+
+    router.get("/api/signin",usercontroller.signin)
 
     router.get("/login",homepage.handlelogin)
 

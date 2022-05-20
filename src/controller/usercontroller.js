@@ -32,19 +32,7 @@ let handlelogin = async (req,res)=>{
 
     const decode = jwt.decode(token)
 
-     
-     
-
     let productlist = await producCrud.getAllProduct()
-
-     
-
-  /*  res.status(200).json({
-        message:"sản phẩm hiện có",
-        productList:productlist
-    })
-    data1:JSON.stringify(data1)
-*/
      
     if (userdata.user.roleid ==='USER') {
         console.log(productlist)
@@ -58,48 +46,55 @@ let handlelogin = async (req,res)=>{
         res.redirect('/crud/get')
     }
     
-
-
-    
-     
+       /* 
+    res.status(200).json({
+        message:"sản phẩm hiện có",
+        productList:productlist
+    })
+    data1:JSON.stringify(data1)
+*/
 }
 let handlesignin = async (req,res)=>{
- 
-    let user ={}
-
-    let message =""
-    let token
-    let checkemail = await userservice.checkuseremail(req.body.email)
-    //kiem tra user co ton tai chua
-    let checkuser = await db.User.findOne({
-        where:{email:req.body.email}
-    })
-   if (checkuser) {
-        if (!checkemail) {
-            user= await crudservice.createuser(req.body)
-           message = "dang ky thanh cong"
-            token = await jwttoken.createjwttoken(user)
-            res.setHeader('Authorization', token); 
-            res.header('Authorization', token);
-       } else {
-           message = "email has existed"
-       }
-    } else {
-        message:"this account has existed"
+ /*
+     let password1 = await hashpassword(data.password)
+            let newuser= await db.User.create({
+                email: data.email,
+                firstname:  data.firstname,
+                lastname:  data.lastname,
+                password:password1,
+                address:  data.address,
+                gender: data.gender === '1' ? true:false,
+                phone: data.phone,
+                roleid:  "USER"
+                
+            }) 
+ */
+    let userdata = {
+                email: req.body.email,
+                firstname:  req.body.firstname,
+                lastname:  req.body.lastname,
+                password:req.body.password,
+                address:  req.body.address,
+                gender: req.body.gender ,
+                phone: req.body.phone,
+                
     }
-   
-    
-    let decode = jwt.decode(token)
-    console.log(decode)
-    res.status(200).json({
-        message:message,
-         
-        token: token
+    console.log(userdata)
 
-    })
+    let user = await userservice.createuser(userdata)
+    
+    console.log(user)
+    
 }
+
+let signin = (req,res)=>{
+    res.render("pages/Signin.ejs")
+}
+
+
 module.exports={
     handlelogin:handlelogin,
     loginpage:loginpage,
-    handlesignin:handlesignin
+    handlesignin:handlesignin,
+    signin:signin
 }

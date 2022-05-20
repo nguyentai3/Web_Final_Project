@@ -3,6 +3,9 @@
  import crudservice from"../sevice/crud_user";
 import newuser from'../sevice/crud_user'
 import db from"../models/index"
+import product_crud from '../sevice/product_crud'
+
+
 import res from "express/lib/response";
 let gethomepage =  async(req,res) => {
     try {
@@ -46,8 +49,10 @@ let crudprocesssingin= async (req,res)=>{
 
 let displayalluser = async (req,res)=>{
     let list = await crudservice.getalluser();
-    res.render("displayuserlist.ejs",{
-        datatable:list
+    let produtcs = await product_crud.getAllProduct();
+     res.render("displayuserlist.ejs",{
+        datatable:list,
+        productlist:produtcs
     })
 }
 

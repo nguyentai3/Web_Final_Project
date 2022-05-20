@@ -1,10 +1,15 @@
  
-import res from 'express/lib/response'
 import producCrud from '../sevice/product_crud'
 import ordercrud from '../sevice/order_crud'
 import  jwttoken from '../sevice/jwttoken'
 import jwt from "jsonwebtoken"
 import usercrud from '../sevice/userservice'
+import db from"../models/index";
+ 
+ 
+ 
+const querystring = require('query-string')
+ 
 let shoppingpage = ()=>{
     return '/pages/Shopping.ejs'
 }
@@ -30,24 +35,76 @@ let cartofuser = async (req,res)=> {
     })
 }
 
-
 let addproducttocart = async (req,res) =>{
-     
-    
-     
-    let neworder = {
+    if (req.body.idproduct) {
+        if (req.body.idproduct && req.body.amount >0 ) {
+            let neworder = {
+            
+                idproduct:parseInt(req.body.idproduct),
+                iduser:parseInt(req.body.iduser),
+                amount: parseInt(req.body.amount)
+            }
+             
         
-        idproduct:parseInt(req.body.idproduct),
-        iduser:parseInt(req.body.iduser),
-        amount: parseInt(req.body.amount)
+            await ordercrud.creatneworder(neworder)
+            //a[i].dataValues.iduser
+            
+            let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
+             
+            console.log("product list ",productlist)
+            let total =  await  ordercrud.totalcost(productlist)
+            total = total.toFixed(2) 
+           /* res.json({
+                message:"them vao vo hang",
+                productlist:productlist ,
+                total:total
+            })*/
+            res.render("pages/Cart.ejs",{
+                message:"them vao vo hang",
+                iduser:req.body.iduser,
+                productlist:productlist ,
+                total:total
+            }) 
+        }   else {
+            
+              await db.order.destroy({
+                where:{
+                    idproduct:parseInt(req.body.idproduct),
+                    iduser:parseInt(req.body.iduser),
+                
+                }
+            })
+             
+            let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
+            let result = await ordercrud.productlistofcart(productlist)
+            let total =  await  ordercrud.totalcost(productlist)
+            total = total.toFixed(2) 
+           /* res.json({
+                message:"them vao vo hang",
+                productlist:productlist ,
+                total:total
+            })*/
+            
+            res.render("pages/Cart.ejs",{
+                message:"them vao vo hang",
+                iduser:req.body.iduser,
+                productlist:result ,
+                total:total
+            }) 
+        }
     }
+
+
      
-    await ordercrud.creatneworder(neworder)
-    //a[i].dataValues.iduser
-    let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
-    console.log(productlist)
-   // console.log(productlist)
     
+     
+}
+
+let cartofuserbyid = async(req,res)=>{
+    let productlist = await ordercrud.showAllProductInCart(req.query.iduser)
+     
+    let result = await ordercrud.productlistofcart(productlist)
+
     let total =  await  ordercrud.totalcost(productlist)
     total = total.toFixed(2) 
    /* res.json({
@@ -55,12 +112,13 @@ let addproducttocart = async (req,res) =>{
         productlist:productlist ,
         total:total
     })*/
+     
     res.render("pages/Cart.ejs",{
         message:"them vao vo hang",
         iduser:req.body.iduser,
-        productlist:productlist ,
+        productlist:result ,
         total:total
-    })
+    }) 
 }
 
 let allProductInCart = async (req,res)=>{
@@ -69,7 +127,7 @@ let allProductInCart = async (req,res)=>{
     let date = Date()
     let cartOfCart =  await ordercrud.showAllProductInCart(idofuser,date)
     
-    console.log(cartOfCart)
+     
     for (let i in cartOfCart) {
         arrayproduct.push({
             nameProduct:i.idproduct,
@@ -86,6 +144,27 @@ let allProductInCart = async (req,res)=>{
     })   */   
 } 
 
+let search = async(req,res)=>{
+     
+        let product = await producCrud.findProductbyName(req.body.nameproduct)
+        
+    
+         
+    
+        const decode = jwt.decode(req.body.token)
+    
+        return res.render('pages/Shopping.ejs',{
+            id:decode.userdata.user.id,
+            token :req.body.token,
+            productlist :product
+    
+        })
+     
+   
+}
+
+
+
 
 module.exports={
     Allitems:showitem,
@@ -93,5 +172,7 @@ module.exports={
     cartofuser:allProductInCart,
     allProductInCart:allProductInCart,
     shoppingpage:shoppingpage,
-    addproducttocart:addproducttocart
+    addproducttocart:addproducttocart,
+    search:search,
+    cartofuserbyid:cartofuserbyid
 }
