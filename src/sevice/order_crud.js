@@ -1,6 +1,7 @@
 import { promise, reject } from "bcrypt/promises";
 import db from"../models/index";
- 
+const { Op } = require("sequelize");
+
 import product from '../sevice/product_crud'
  
 let showAllorders = async ()=>{

@@ -110,12 +110,6 @@ let findProductbyName =  async (name)=>{
         }
     })
    
-
-
-    
-
-
-
 }
 
 

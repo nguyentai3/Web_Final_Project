@@ -2,6 +2,7 @@
 import product_crud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
 import crudservice from '../sevice/userservice'
+import user_crud from '../sevice/userservice'
 let addnewproduct = async(req,res)=>{
     let productlist = await producCrud.addnewproduct(req.body)
     
@@ -31,11 +32,11 @@ let updateProduct = async (req,res)=>{
 
 
 let displayalluser = async (req,res)=>{
-    let list = await crudservice.getalluser();
+    let list = await crudservice.showAllUser();
   
 
-    console.log(orderlist)
-     res.render("page/Admin_user.ejs",{
+    
+     res.render("pages/Admin_user.ejs",{
         datatable:list,
  
     })
@@ -87,10 +88,51 @@ let displayallorder = async (req,res)=>{
     })
 }
 
+/*let search = async(req,res)=>{
+     
+        let product = await producCrud.findProductbyName(req.body.nameproduct)
+        
+        const decode = jwt.decode(req.body.token)
+    
+        return res.render('pages/Shopping.ejs',{
+            id:decode.userdata.user.id,
+            token :req.body.token,
+            productlist :product
+    
+        })
+     res.render("pages/Admin_user.ejs",{
+        datatable:list,
+ 
+    })
+   
+}
+
+
+findProductbyName
+*/
+let searchuser = async (req,res)=>{
+    let user = await user_crud.searchuserbyid(req.body.email)
+    return res.render('pages/Admin_user.ejs',{
+        datatable:user,
+    })
+}
+
+let searchproduct = async(req,res)=>{
+    let product = await product_crud.findProductbyName(req.body.nameproduct)
+    return res.render('pages/Admin_product.ejs',{
+        productlist:product,
+    })
+}
+
+let searchorder = async (req,res)=>{}
+
 module.exports={
     showAllProduct:showAllProduct,
     addnewproduct:addnewproduct,
     updateProduct:updateProduct,
+    searchuser:searchuser,
+    searchproduct:searchproduct,
+    searchorder:searchorder,
     displayallorder:displayallorder,
     displayallproduct:displayallproduct,
     displayalluser:displayalluser

@@ -1,8 +1,7 @@
 import db from '../models/index'
-import crud from '../sevice/crud_user'
-import bcrypt from'bcrypt'
-import { reject } from 'bcrypt/promises'
- 
+ import bcrypt from'bcrypt'
+ const { Op } = require("sequelize");
+
  
 let handleuserlogin =(email,password)=>{
     return new Promise(async (resovle,reject)=>{
@@ -83,13 +82,49 @@ let checkuseremail = (email)=>{
         }
     })
 }
-
  
+ 
+
+let searchuserbyid = async (email) =>{
+    return new Promise(async(resovle,reject)=>{
+        try {
+           if (email) {
+            let user  = await   db.User.findAll( {
+                where:{
+                    email: {
+                        // *name* trong query 
+                        [Op.regexp]:email
+                    }
+                }
+            });
+            
+            resovle(user)
+           } else {
+            let user  = await   db.User.findAll();
+            
+            resovle(user)
+           }
+        
+            
+        } catch(e) {
+            reject(e)
+        }
+    })
+}
+
+let showAllUser = async ()=>{
+    let list = await db.User.findAll()
+    return list
+    
+
+}
 
  
 
 module.exports= {
     handleuserlogin:handleuserlogin,
     checkuseremail:checkuseremail,
-    getuserbyid:getuserbyid
+    showAllUser:showAllUser,
+    getuserbyid:getuserbyid,
+    searchuserbyid:searchuserbyid
 }
