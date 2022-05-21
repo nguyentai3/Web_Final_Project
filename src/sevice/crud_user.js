@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { reject } = require('bcrypt/promises');
 import db from"../models/index";
  var salt =bcrypt.genSalt(100)
+ 
  let createuser = async (data)=>{
      return new Promise(async(resovle,reject)=>{
 

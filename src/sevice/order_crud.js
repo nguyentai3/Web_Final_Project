@@ -7,9 +7,8 @@ let showAllorders = async ()=>{
     let list = await db.order.findAll({
         raw:true
     })
-    return {
-        list:list
-    }
+    return list
+    
 
 }
 

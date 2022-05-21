@@ -4,7 +4,7 @@
 import newuser from'../sevice/crud_user'
 import db from"../models/index"
 import product_crud from '../sevice/product_crud'
-
+import orders_crud from '../sevice/order_crud'
 
 import res from "express/lib/response";
 let gethomepage =  async(req,res) => {
@@ -50,9 +50,34 @@ let crudprocesssingin= async (req,res)=>{
 let displayalluser = async (req,res)=>{
     let list = await crudservice.getalluser();
     let produtcs = await product_crud.getAllProduct();
+    let orderlist = await orders_crud.showAllorders();
+
+    let result = []
+
+
+    for (var i =0;i<orderlist.lenght;i++) {
+
+        let product = await product_crud.findProductbyId(orderlist[i].idproduct)
+        let cost = product.dataValues.cost * orderlist[i].amount
+
+        result.push({
+            id: orderlist[i].id,
+            iduser: orderlist[i].iduser,
+            idproduct: orderlist[i].idproduct,
+            amount: orderlist[i].amount,
+            paymentmethob: orderlist[i].paymentmethob,
+            createdAt: orderlist[i].createdAt,
+            cost: cost
+        })
+    }
+
+
+
+    console.log(orderlist)
      res.render("displayuserlist.ejs",{
         datatable:list,
-        productlist:produtcs
+        productlist:produtcs,
+        orderlist:orderlist
     })
 }
 

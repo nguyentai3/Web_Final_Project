@@ -14,7 +14,13 @@ let initwebroute = (app) =>{
 
     router.post("/crud/post",homepage.crudprocesssingin)
 
+
+    
+
     router.get("/crud/get",homepage.displayalluser)
+
+
+
 
     router.get("/crud/checkuser",homepage.checkuserbyid)
 
@@ -60,6 +66,13 @@ let initwebroute = (app) =>{
     router.get("/api/signin",usercontroller.signin)
 
     router.get("/login",homepage.handlelogin)
+
+
+    router.get("/api/admin/user",admincontroller.displayalluser)
+
+    router.get("/api/admin/product",admincontroller.displayallproduct)
+    router.get("/api/admin/order",admincontroller.displayallorder)
+
 
     return app.use("/",router);
 }

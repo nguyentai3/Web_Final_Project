@@ -101,10 +101,10 @@
                 Dropdown
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="http://localhost:8080/api/admin/user">User</a>
-                <a class="dropdown-item" href="http://localhost:8080/api/admin/product">Product</a>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="http://localhost:8080/api/admin/order">Order</a>
+                <a class="dropdown-item" href="#">Something else here</a>
               </div>
             </li>
             <li class="nav-item">
@@ -118,93 +118,7 @@
         </div>
       </nav>
     <div class="form-group col-md-6" style="text-align:center">
-        <h1>User</h1>
-        <table class="table table-bordered"  >
-            <thead class="thead-dark">
-               
-                <td>Email</td>
-                <td>First Name</td> 
-                <td>Last Name</td> 
-                 
-                <td>Address</td> 
-                <td>Gender</td> 
-                <td>Phone</td> 
-                 
-               
-                <td>Actions</td>
-    
-    
-            </thead>
-            <tbody>   
-            <%
-                for (var i=0;i<datatable.length;i++) {%>
-                    <tr>
-                       <td><%=datatable[i].email%></td> 
-                       <td><%=datatable[i].firstname%></td> 
-                       <td><%=datatable[i].lastname%></td> 
-                        
-                       <td><%=datatable[i].address%></td> 
-                       <td><%=datatable[i].gender%></td> 
-                       <td><%=datatable[i].phone%></td> 
-                       
-                        
-                        <td> 
-                            <a href="/crud/checkuser?id=<%= datatable[i].id%>" class="btn-edit" type="button">Edit</a>
-                            <a href="/crud/delete?id=<%= datatable[i].id%>" class="btn-delete" type="button">delete</a>
-                            
-                        </td>
-    
-                    </tr>
-            <%
-                }
-            %>
-        </tbody>
-        </table>
-
-        <h1>Product</h1>
-        <table class="table table-bordered" >
-            <tr  class="form-group col-md-6"  >
-                <td>Id</td>
-                <td>Name</td>
-                <td>Quantity</td> 
-                <td>Cost</td> 
-                 
-                <td>description</td> 
-                <td>createdAt</td> 
-                <td>updatedAt</td> 
-                 
-               
-                <td>Actions</td>
-    
-    
-            </tr>  
-            <%
-                for (var i=0;i<productlist.length;i++) {%>
-                    <tr>
-                       <td><%=productlist[i].dataValues.id%></td> 
-
-                       <td><%=productlist[i].dataValues.nameproduct%></td> 
-                       <td><%=productlist[i].dataValues.quantity%></td> 
-                       <td><%=productlist[i].dataValues.cost%></td>
-
-                       <td><%=productlist[i].dataValues.description%></td> 
-                       <td><%=productlist[i].dataValues.createdAt%></td> 
-                       <td><%=productlist[i].dataValues.updatedAt%></td> 
-                        
-                       
-                        
-                        <td> 
-                            <a href="/crud/checkuser?id=<%= productlist[i].dataValues.id %>" class="btn-edit" type="button">Edit</a>
-                            <a href="/crud/delete?id=<%=productlist[i].dataValues.id%>" class="btn-delete" type="button">delete</a>
-                            
-                        </td>
-    
-                    </tr>
-            <%
-                }
-            %>
-        </table>
-        <h1>Order</h1> 
+           <h1>Order</h1> 
         <table class="table table-bordered"  >
             <tr  class="form-group col-md-6"  >
                
