@@ -79,6 +79,11 @@ let initwebroute = (app) =>{
     router.post("/api/searchorder",admincontroller.searchorder)
 
 
+    router.get("/api/createproduct",admincontroller.creatproductpage)
+    router.post("/api/handlecreateproduct",admincontroller.handlecreateproduct)
+
+
+
     return app.use("/",router);
 }
 

@@ -23,6 +23,7 @@ let createpruduct = async (product) =>{
                 cost:product.cost,
                 description:product.description
             })
+            await newproduct.save()
             resolve(newproduct)
         } catch(e) {
             reject(e)
@@ -119,5 +120,6 @@ module.exports ={
     getAllProduct:getAllProduct,
     addnewproduct:createpruduct,
     findProductbyId:findProductbyId,
+    createpruduct:createpruduct,
     findProductbyName:findProductbyName
 }

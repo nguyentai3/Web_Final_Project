@@ -10,7 +10,6 @@ let loginpage =(req,res) =>{
     res.render("pages/login.ejs")
 }
 
-
 let handlelogin = async (req,res)=>{
     let email  = req.body.email
     let password = req.body.password 
@@ -25,7 +24,7 @@ let handlelogin = async (req,res)=>{
     //check email exist
 
     let userdata  = await userservice.handleuserlogin(email,password)
-    console.log(userdata)
+     
     let token =  jwttoken.createjwttoken(userdata)
        
     token = await jwttoken.createjwttoken(userdata)
@@ -33,18 +32,21 @@ let handlelogin = async (req,res)=>{
     const decode = jwt.decode(token)
 
     let productlist = await producCrud.getAllProduct()
-     
-    if (userdata.user.roleid ==='USER') {
-        console.log(productlist)
+    
+     console.log(userdata.user.roleid)
+    
+    
+    if (decode.userdata.user.roleid ==='USER') {
         return res.render('pages/Shopping.ejs',{
             id:decode.userdata.user.id,
             token :token,
             productlist :productlist
-
+    
         })
-    } else {
-        res.redirect('/crud/get')
-    }
+      
+    } else   {
+        res.redirect('/crud/get')   
+    } 
     
        /* 
     res.status(200).json({
@@ -55,20 +57,7 @@ let handlelogin = async (req,res)=>{
 */
 }
 let handlesignin = async (req,res)=>{
- /*
-     let password1 = await hashpassword(data.password)
-            let newuser= await db.User.create({
-                email: data.email,
-                firstname:  data.firstname,
-                lastname:  data.lastname,
-                password:password1,
-                address:  data.address,
-                gender: data.gender === '1' ? true:false,
-                phone: data.phone,
-                roleid:  "USER"
-                
-            }) 
- */
+ 
     let userdata = {
                 email: req.body.email,
                 firstname:  req.body.firstname,

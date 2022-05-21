@@ -87,29 +87,7 @@ let displayallorder = async (req,res)=>{
         orderlist:orderlist
     })
 }
-
-/*let search = async(req,res)=>{
-     
-        let product = await producCrud.findProductbyName(req.body.nameproduct)
-        
-        const decode = jwt.decode(req.body.token)
-    
-        return res.render('pages/Shopping.ejs',{
-            id:decode.userdata.user.id,
-            token :req.body.token,
-            productlist :product
-    
-        })
-     res.render("pages/Admin_user.ejs",{
-        datatable:list,
  
-    })
-   
-}
-
-
-findProductbyName
-*/
 let searchuser = async (req,res)=>{
     let user = await user_crud.searchuserbyid(req.body.email)
     return res.render('pages/Admin_user.ejs',{
@@ -124,7 +102,35 @@ let searchproduct = async(req,res)=>{
     })
 }
 
-let searchorder = async (req,res)=>{}
+let searchorder = async (req,res)=>{
+
+}
+
+
+let creatproductpage = async(req,res)=>{
+    res.render("pages/Createproduct.ejs")
+}
+
+let handlecreateproduct = async (req,res)=>{
+    let newproduct = {
+        nameproduct:req.body.nameproduct,
+        quantity:req.body.quantity,
+        cost:req.body.cost,
+        description:req.body.description
+    }
+    
+    await product_crud.createpruduct(newproduct)
+
+
+    let produtcs = await product_crud.getAllProduct();
+
+     res.render("pages/Admin_product.ejs",{
+ 
+        productlist:produtcs,
+ 
+    })
+}
+
 
 module.exports={
     showAllProduct:showAllProduct,
@@ -133,7 +139,9 @@ module.exports={
     searchuser:searchuser,
     searchproduct:searchproduct,
     searchorder:searchorder,
+    creatproductpage:creatproductpage,
     displayallorder:displayallorder,
+    handlecreateproduct:handlecreateproduct,
     displayallproduct:displayallproduct,
     displayalluser:displayalluser
 }
