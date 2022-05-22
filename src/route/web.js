@@ -43,9 +43,6 @@ let initwebroute = (app) =>{
  
     router.get('/api/Shopping',ordercontroller.shoppingpage)
 
-    
-  
-
     router.post("/api/shopping",ordercontroller.Allitems)
 
     router.post("/api/shopping/cart",auth.authenloginuser,ordercontroller.cartofuser)
@@ -82,7 +79,7 @@ let initwebroute = (app) =>{
     router.get("/api/createproduct",admincontroller.creatproductpage)
     router.post("/api/handlecreateproduct",admincontroller.handlecreateproduct)
 
-
+    router.post("/api/updateproduct",)
 
     return app.use("/",router);
 }

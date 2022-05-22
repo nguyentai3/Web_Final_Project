@@ -111,7 +111,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0" action="/api/searchorder" method="post">
          
-        <input class="form-control mr-sm-2" type="search" placeholder="id order" aria-label="Search" name="email">
+        <input class="form-control mr-sm-2" type="search" placeholder="Name Product" aria-label="Search" name="iduser">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
@@ -121,30 +121,32 @@
         <table class="table table-bordered"  >
             <tr  class="form-group col-md-6"  >
                
-                <td>Email</td>
-                <td>First Name</td> 
-                <td>Last Name</td> 
+                <td>Id Order</td>
+                <td>Id user</td> 
+                <td>idproduct</td> 
                  
-                <td>Address</td> 
-                <td>Gender</td> 
+                <td>amount</td> 
+                <td>cost</td> 
                 <td>Phone</td> 
-                 <td>Payment Methob</td>
-                <td>CreatedAt</td>
+                 <td>createdAt</td>
+                <td>paymentmethob</td>
+                <td>updatedAt</td>
+    
                 <td>Actions</td>
-    
-    
             </tr>  
             <%
                 for (var i=0;i<orderlist.length;i++) {%>
                     <tr>
                        <td><%=orderlist[i].id%></td> 
                        <td><%=orderlist[i].iduser%></td> 
-                       <td><%=orderlist[i].idproduct%></td> 
+                       <td><%=orderlist[i].Name%></td> 
                        <td><%=orderlist[i].amount%></td> 
                        <td><%=orderlist[i].cost%></td> 
+                       <td><%=orderlist[i].phone%></td> 
+                       
                        <td><%=orderlist[i].createdAt%></td> 
                        <td><%=orderlist[i].paymentmethob%></td> 
-                       <td><%=orderlist[i].createdAt%></td> 
+                       <td><%=orderlist[i].updatedAt%></td> 
                         
                        
                         

@@ -1,25 +1,55 @@
 import { promise, reject } from "bcrypt/promises";
 import db from"../models/index";
+import user_crud from'../sevice/userservice'
 const { Op } = require("sequelize");
 
-import product from '../sevice/product_crud'
- 
 let showAllorders = async ()=>{
-    let list = await db.order.findAll({
-        raw:true
+    return new Promise(async (resolve,reject)=>{
+        try {
+            let list = await db.order.findAll({
+                raw:true
+            })
+             
+            let result = []
+                    for (var i =0;i<list.length;i++) {
+                        let product = await db.product.findOne({
+                            where:{
+                                id:list[i].idproduct
+                            }
+                        })
+                         
+                        let user = await user_crud.getuserbyid(list[i].iduser)
+
+                        result.push({
+                            id:list[i].id,
+                            iduser:list[i].iduser,
+                            
+                            Name: product.nameproduct,
+                            cost:(list[i].amount *product.cost).toFixed(2),
+                            amount:list[i].amount,
+                            phone:user.dataValues.phone,
+                            createdAt:list[i].createdAt,
+                            paymentmethob:list[i].paymentmethob,
+                            updatedAt:list[i].updatedAt,
+                            description:product.description
+                        })
+                    }
+                    console.log("result   ",result)
+                    resolve(result)
+        }catch(e) {
+            reject(e)
+        }
     })
-    return list
-    
 
 }
 
-let findorderbyid= async(idorder) =>{
+let findorderbyiduser= async(idorder) =>{
 
    return new Promise(async(resovle,reject)=>{
     try {
-        let order = await db.order.findOne({
+        let order = await db.order.findAll({
             where:{
-                id:idorder
+                iduser:idorder
             }
         })
         if (order) {
@@ -148,7 +178,7 @@ let productlistofcart =async (order) =>{
 
 module.exports = {
     showAllorders:showAllorders,
-    findorderbyid:findorderbyid,
+    findorderbyiduser:findorderbyiduser,
     showAllProductInCart:showAllProductInCart,
     creatneworder:creatneworder,
     totalcost:totalcost,

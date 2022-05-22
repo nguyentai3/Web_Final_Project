@@ -204,46 +204,52 @@
         </table>
         <h1>Order</h1> 
         <table class="table table-bordered"  >
-            <tr  class="form-group col-md-6"  >
-               
-                <td>Email</td>
-                <td>First Name</td> 
-                <td>Last Name</td> 
-                 
-                <td>Address</td> 
-                <td>Gender</td> 
-                <td>Phone</td> 
-                 <td>Payment Methob</td>
-                <td>CreatedAt</td>
-                <td>Actions</td>
-    
-    
-            </tr>  
+          <thead class="thead-dark">
+             
+            <td>Id Order</td>
+            <td>Id user</td> 
+            <td>idproduct</td> 
+             
+            <td>amount</td> 
+            <td>cost</td> 
+            <td>Phone</td> 
+             <td>createdAt</td>
+            <td>paymentmethob</td>
+            <td>updatedAt</td>
+
+            <td>Actions</td>
+  
+  
+          </thead>
+          <tbody>   
             <%
-                for (var i=0;i<orderlist.length;i++) {%>
-                    <tr>
-                       <td><%=orderlist[i].id%></td> 
-                       <td><%=orderlist[i].iduser%></td> 
-                       <td><%=orderlist[i].idproduct%></td> 
-                       <td><%=orderlist[i].amount%></td> 
-                       <td><%=orderlist[i].cost%></td> 
-                       <td><%=orderlist[i].createdAt%></td> 
-                       <td><%=orderlist[i].paymentmethob%></td> 
-                       <td><%=orderlist[i].createdAt%></td> 
+            for (var i=0;i<orderlist.length;i++) {%>
+                <tr>
+                   <td><%=orderlist[i].id%></td> 
+                   <td><%=orderlist[i].iduser%></td> 
+                   <td><%=orderlist[i].Name%></td> 
+                   <td><%=orderlist[i].amount%></td> 
+                   <td><%=orderlist[i].cost%></td> 
+                   <td><%=orderlist[i].phone%></td> 
+                   
+                   <td><%=orderlist[i].createdAt%></td> 
+                   <td><%=orderlist[i].paymentmethob%></td> 
+                   <td><%=orderlist[i].updatedAt%></td> 
+                    
+                   
+                    
+                    <td> 
+                        <a href="/crud/checkuser?id=<%=orderlist[i].iduser%>" class="btn-edit" type="button">Edit</a>
+                        <a href="/crud/delete?id=<%=orderlist[i].iduser%>" class="btn-delete" type="button">delete</a>
                         
-                       
-                        
-                        <td> 
-                            <a href="/crud/checkuser?id=<%=orderlist[i].iduser%>" class="btn-edit" type="button">Edit</a>
-                            <a href="/crud/delete?id=<%=orderlist[i].iduser%>" class="btn-delete" type="button">delete</a>
-                            
-                        </td>
-    
-                    </tr>
-            <%
-                }
-            %>
-        </table>
+                    </td>
+
+                </tr>
+        <%
+            }
+        %>
+      </tbody>
+      </table>
 
 
     </div>

@@ -2,10 +2,11 @@ import userservice from '../sevice/userservice'
 import jwt from'jsonwebtoken'
 import  jwttoken from '../sevice/jwttoken'
 import crudservice from"../sevice/crud_user";
-import db from '../models';
-const querystring = require('query-string')
+ const querystring = require('query-string')
 import producCrud from '../sevice/product_crud'
 
+ 
+  import orders_crud from '../sevice/order_crud'
 let loginpage =(req,res) =>{
     res.render("pages/login.ejs")
 }
@@ -25,18 +26,20 @@ let handlelogin = async (req,res)=>{
 
     let userdata  = await userservice.handleuserlogin(email,password)
      
+    console.log(userdata)
+
     let token =  jwttoken.createjwttoken(userdata)
-       
+    
+    console.log(token)
+
     token = await jwttoken.createjwttoken(userdata)
 
     const decode = jwt.decode(token)
 
     let productlist = await producCrud.getAllProduct()
     
-     console.log(userdata.user.roleid)
     
-    
-    if (decode.userdata.user.roleid ==='USER') {
+    if (userdata.user.roleid ==='USER') {
         return res.render('pages/Shopping.ejs',{
             id:decode.userdata.user.id,
             token :token,
@@ -45,7 +48,38 @@ let handlelogin = async (req,res)=>{
         })
       
     } else   {
-        res.redirect('/crud/get')   
+        let list = await crudservice.getalluser();
+    let produtcs = await producCrud.getAllProduct();
+    let orderlist = await orders_crud.showAllorders();
+
+    let result = []
+
+
+    for (var i =0;i<orderlist.lenght;i++) {
+
+        let product = await producCrud.findProductbyId(orderlist[i].idproduct)
+        let cost = product.dataValues.cost * orderlist[i].amount
+
+        result.push({
+            id: orderlist[i].id,
+            iduser: orderlist[i].iduser,
+            idproduct: orderlist[i].idproduct,
+            amount: orderlist[i].amount,
+            paymentmethob: orderlist[i].paymentmethob,
+            createdAt: orderlist[i].createdAt,
+            cost: cost
+        })
+    }
+
+    console.log(token)
+
+    console.log(orderlist)
+     res.render("displayuserlist.ejs",{
+        datatable:list,
+        productlist:produtcs,
+        orderlist:orderlist,
+        token:token
+    })  
     } 
     
        /* 
@@ -68,8 +102,7 @@ let handlesignin = async (req,res)=>{
                 phone: req.body.phone,
                 
     }
-    console.log(userdata)
-
+ 
     let user = await userservice.createuser(userdata)
     
     console.log(user)

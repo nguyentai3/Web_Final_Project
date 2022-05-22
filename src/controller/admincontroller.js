@@ -1,8 +1,8 @@
- 
 import product_crud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
 import crudservice from '../sevice/userservice'
 import user_crud from '../sevice/userservice'
+
 let addnewproduct = async(req,res)=>{
     let productlist = await producCrud.addnewproduct(req.body)
     
@@ -33,12 +33,13 @@ let updateProduct = async (req,res)=>{
 
 let displayalluser = async (req,res)=>{
     let list = await crudservice.showAllUser();
-  
+    
+    
 
     
      res.render("pages/Admin_user.ejs",{
         datatable:list,
- 
+        
     })
 }
 
@@ -56,35 +57,16 @@ let displayallproduct = async (req,res)=>{
 
 let displayallorder = async (req,res)=>{
  
-    let produtcs = await product_crud.getAllProduct();
     let orderlist = await orders_crud.showAllorders();
 
-    let result = []
+    
+ 
 
-
-    for (var i =0;i<orderlist.lenght;i++) {
-
-        let product = await product_crud.findProductbyId(orderlist[i].idproduct)
-        let cost = product.dataValues.cost * orderlist[i].amount
-
-        result.push({
-            id: orderlist[i].id,
-            iduser: orderlist[i].iduser,
-            idproduct: orderlist[i].idproduct,
-            amount: orderlist[i].amount,
-            paymentmethob: orderlist[i].paymentmethob,
-            createdAt: orderlist[i].createdAt,
-            cost: cost
-        })
-    }
-
-
-
-    console.log(orderlist)
      res.render("pages/Admin_order.ejs",{
  
  
-        orderlist:orderlist
+        orderlist:orderlist,
+        
     })
 }
  
@@ -103,7 +85,15 @@ let searchproduct = async(req,res)=>{
 }
 
 let searchorder = async (req,res)=>{
+     
+    let order = await orders_crud.findorderbyiduser(req.body.iduser)
 
+    res.render("pages/Admin_order.ejs",{
+ 
+ 
+        orderlist:order,
+        
+    })
 }
 
 
