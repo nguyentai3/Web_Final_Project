@@ -34,7 +34,7 @@ let showAllorders = async ()=>{
                             description:product.description
                         })
                     }
-                    console.log("result   ",result)
+                    
                     resolve(result)
         }catch(e) {
             reject(e)
@@ -47,19 +47,39 @@ let findorderbyiduser= async(idorder) =>{
 
    return new Promise(async(resovle,reject)=>{
     try {
-        let order = await db.order.findAll({
+        let list = await db.order.findAll({
             where:{
                 iduser:idorder
             }
         })
-        if (order) {
-            resovle(order)
-        } else {
-            resovle({
-                message:"invalid id order"
-            }) 
-        }
-    } catch(e) {
+         
+        let result = []
+                for (var i =0;i<list.length;i++) {
+                    let product = await db.product.findOne({
+                        where:{
+                            id:list[i].idproduct
+                        }
+                    })
+                     
+                    let user = await user_crud.getuserbyid(list[i].iduser)
+
+                    result.push({
+                        id:list[i].id,
+                        iduser:list[i].iduser,
+                        
+                        Name: product.nameproduct,
+                        cost:(list[i].amount *product.cost).toFixed(2),
+                        amount:list[i].amount,
+                        phone:user.dataValues.phone,
+                        createdAt:list[i].createdAt,
+                        paymentmethob:list[i].paymentmethob,
+                        updatedAt:list[i].updatedAt,
+                        description:product.description
+                    })
+                }
+                 
+                resovle(result)
+    }catch(e) {
         reject(e)
     }
    })
