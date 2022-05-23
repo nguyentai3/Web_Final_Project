@@ -50,10 +50,7 @@ let initwebroute = (app) =>{
     router.post("/api/shopping/addtocart",auth.authenloginuser,ordercontroller.allProductInCart)
     
     router.get("/api/shopping/cartofuserbyid",ordercontroller.cartofuserbyid)
-    
-
-    
-   
+       
     router.post("/api/searchproductbyname",ordercontroller.search)
 
     router.post("/api/addproducttocart",auth.authenloginuser,ordercontroller.addproducttocart)
@@ -79,8 +76,10 @@ let initwebroute = (app) =>{
     router.get("/api/createproduct",admincontroller.creatproductpage)
     router.post("/api/handlecreateproduct",admincontroller.handlecreateproduct)
 
-    router.post("/api/updateproduct",)
+ 
+    router.get("/api/admin/updateproduct")
 
+ 
     return app.use("/",router);
 }
 

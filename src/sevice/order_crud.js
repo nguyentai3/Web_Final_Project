@@ -2,7 +2,7 @@ import { promise, reject } from "bcrypt/promises";
 import db from"../models/index";
 import user_crud from'../sevice/userservice'
 const { Op } = require("sequelize");
-
+ 
 let showAllorders = async ()=>{
     return new Promise(async (resolve,reject)=>{
         try {
@@ -90,11 +90,12 @@ let creatneworder = async(updateorder) =>{
     return new Promise(async(resolve,reject)=>{
         
         try {
+              
             let order = await db.order.findOne({
                 where:{
                     idproduct:updateorder.idproduct,
-                    iduser:updateorder.iduser
-                }
+                    iduser:updateorder.iduser,
+                 }
             })
             let product = await db.product.findOne({
                 where:{
@@ -185,6 +186,7 @@ let productlistofcart =async (order) =>{
                     Name: product.dataValues.nameproduct,
                     cost:(order[i].dataValues.amount *product.dataValues.cost).toFixed(2),
                     amount:order[i].dataValues.amount,
+                    Date : order[i].dataValues.createdAt,
                     description:product.dataValues.description
                 })
             }

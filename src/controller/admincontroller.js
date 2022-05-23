@@ -58,10 +58,6 @@ let displayallproduct = async (req,res)=>{
 let displayallorder = async (req,res)=>{
  
     let orderlist = await orders_crud.showAllorders();
-
-    
- 
-
      res.render("pages/Admin_order.ejs",{
  
  
@@ -121,6 +117,9 @@ let handlecreateproduct = async (req,res)=>{
     })
 }
 
+ 
+
+
 
 module.exports={
     showAllProduct:showAllProduct,
@@ -133,5 +132,5 @@ module.exports={
     displayallorder:displayallorder,
     handlecreateproduct:handlecreateproduct,
     displayallproduct:displayallproduct,
-    displayalluser:displayalluser
+    displayalluser:displayalluser 
 }

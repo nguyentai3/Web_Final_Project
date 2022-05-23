@@ -4,9 +4,7 @@ import  jwttoken from '../sevice/jwttoken'
 import crudservice from"../sevice/crud_user";
  const querystring = require('query-string')
 import producCrud from '../sevice/product_crud'
-
- 
-  import orders_crud from '../sevice/order_crud'
+import orders_crud from '../sevice/order_crud'
 let loginpage =(req,res) =>{
     res.render("pages/login.ejs")
 }
@@ -30,15 +28,13 @@ let handlelogin = async (req,res)=>{
 
     let token =  jwttoken.createjwttoken(userdata)
     
-    console.log(token)
-
+ 
     token = await jwttoken.createjwttoken(userdata)
 
     const decode = jwt.decode(token)
 
     let productlist = await producCrud.getAllProduct()
-    
-    
+     
     if (userdata.user.roleid ==='USER') {
         return res.render('pages/Shopping.ejs',{
             id:decode.userdata.user.id,
@@ -49,13 +45,13 @@ let handlelogin = async (req,res)=>{
       
     } else   {
         let list = await crudservice.getalluser();
-    let produtcs = await producCrud.getAllProduct();
-    let orderlist = await orders_crud.showAllorders();
+        let produtcs = await producCrud.getAllProduct();
+        let orderlist = await orders_crud.showAllorders();
 
-    let result = []
+        let result = []
 
 
-    for (var i =0;i<orderlist.lenght;i++) {
+        for (var i =0;i<orderlist.lenght;i++) {
 
         let product = await producCrud.findProductbyId(orderlist[i].idproduct)
         let cost = product.dataValues.cost * orderlist[i].amount
@@ -71,10 +67,9 @@ let handlelogin = async (req,res)=>{
         })
     }
 
-    console.log(token)
 
-    console.log(orderlist)
-     res.render("displayuserlist.ejs",{
+ 
+      res.render("displayuserlist.ejs",{
         datatable:list,
         productlist:produtcs,
         orderlist:orderlist,
@@ -103,12 +98,30 @@ let handlesignin = async (req,res)=>{
                 
     }
  
-    let user = await userservice.createuser(userdata)
+    let user = await crudservice.createuser(userdata)
     
-    console.log(user)
-    
-}
+     
+    let token = await jwttoken.createjwttoken(user)
 
+    const decode = jwt.decode(token)
+
+    let productlist = await producCrud.getAllProduct()
+     
+    //console.log(user)
+    
+    if (user.dataValues.roleid ==='USER') {
+        return res.render('pages/Shopping.ejs',{
+            id:user.dataValues.id,
+            token :token,
+            productlist :productlist
+    
+        })
+    
+
+
+}
+}
+    
 let signin = (req,res)=>{
     res.render("pages/Signin.ejs")
 }

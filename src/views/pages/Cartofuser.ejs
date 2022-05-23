@@ -20,16 +20,19 @@
     <% for (var i = 0;i<productlist.length;i++) { %>
     
         <div class="card" style="width: 18rem;">
-            <div style="text-align:center">Id <%=productlist[i].dataValues.id%></div>
+            
+            <div style="text-align:center">Id <%=productlist[i].id%></div>
             <div class="card-body">
               <h5 class="card-title"> Name  <%=productlist[i].Name%></h5>
               <h5 class="card-title">  cost   <%=productlist[i].cost%></h5>
               <h5 class="card-title">  amount   <%=productlist[i].amount%></h5>
-
+              <h5 class="card-title">  Date   <%=productlist[i].Date%></h5>
+                
+                 
               <p class="card-text">  description  <%=productlist[i].description%></p> 
             </div>
           </div>
           <br>
     <%}%>
-</body> 
+</body>
 </html>

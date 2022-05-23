@@ -116,48 +116,6 @@
         </div>
       </nav>
     <div class="form-group col-md-6" style="text-align:center">
-        <h1>User</h1>
-        <table class="table table-bordered"  >
-            <thead class="thead-dark">
-               
-                <td>Email</td>
-                <td>First Name</td> 
-                <td>Last Name</td> 
-                 
-                <td>Address</td> 
-                <td>Gender</td> 
-                <td>Phone</td> 
-                 
-               
-                <td>Actions</td>
-    
-    
-            </thead>
-            <tbody>   
-            <%
-                for (var i=0;i<datatable.length;i++) {%>
-                    <tr>
-                       <td><%=datatable[i].email%></td> 
-                       <td><%=datatable[i].firstname%></td> 
-                       <td><%=datatable[i].lastname%></td> 
-                        
-                       <td><%=datatable[i].address%></td> 
-                       <td><%=datatable[i].gender%></td> 
-                       <td><%=datatable[i].phone%></td> 
-                       
-                        
-                        <td> 
-                            <a href="/crud/checkuser?id=<%= datatable[i].id%>" class="btn-edit" type="button">Edit</a>
-                            <a href="/crud/delete?id=<%= datatable[i].id%>" class="btn-delete" type="button">delete</a>
-                            
-                        </td>
-    
-                    </tr>
-            <%
-                }
-            %>
-        </tbody>
-        </table>
 
         <h1>Product</h1>
         <table class="table table-bordered" >

@@ -51,27 +51,27 @@ let addproducttocart = async (req,res) =>{
             
             let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
              
-            console.log("product list ",productlist)
-            let total =  await  ordercrud.totalcost(productlist)
+             let total =  await  ordercrud.totalcost(productlist)
             total = total.toFixed(2) 
            /* res.json({
                 message:"them vao vo hang",
                 productlist:productlist ,
                 total:total
             })*/
+            let result = await ordercrud.productlistofcart(productlist)
             res.render("pages/Cart.ejs",{
                 message:"them vao vo hang",
                 iduser:req.body.iduser,
-                productlist:productlist ,
+                productlist:result ,
                 total:total
             }) 
         }   else {
-            
+            var date = new Date()
               await db.order.destroy({
                 where:{
                     idproduct:parseInt(req.body.idproduct),
                     iduser:parseInt(req.body.iduser),
-                
+                    createdAt: date
                 }
             })
              
