@@ -5,6 +5,8 @@ import crudservice from"../sevice/crud_user";
  const querystring = require('query-string')
 import producCrud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
+import db from '../models';
+
 let loginpage =(req,res) =>{
     res.render("pages/login.ejs")
 }
@@ -121,15 +123,42 @@ let handlesignin = async (req,res)=>{
 
 }
 }
-    
+ 
+
+
 let signin = (req,res)=>{
     res.render("pages/Signin.ejs")
 }
 
+let cancleorer = async(req,res) =>{
+    
+    await orders_crud.deleteorder(req.query.idorder)
+     
+    let productlist = await orders_crud.showAllProductInCart(req.query.iduser)
+     
+    let result = await orders_crud.productlistofcart(productlist)
+
+    let total =  await  orders_crud.totalcost(productlist)
+    total = total.toFixed(2) 
+   /* res.json({
+        message:"them vao vo hang",
+        productlist:productlist ,
+        total:total
+    })*/
+     
+    res.render("pages/Cart.ejs",{
+         
+        iduser:req.query.iduser,
+        productlist:result ,
+        total:total
+    }) 
+
+}
 
 module.exports={
     handlelogin:handlelogin,
     loginpage:loginpage,
     handlesignin:handlesignin,
+    cancleorer:cancleorer,
     signin:signin
 }

@@ -117,14 +117,25 @@ let handlecreateproduct = async (req,res)=>{
     })
 }
 
+let updateorderpage = async (req,res)=>{
+     let order = await orders_crud.findorderbyid(req.query.id)
+    res.render('pages/UpdateOrder.ejs',{
+        iduser:req.query.id,
+        order: order
+    })
+}
  
+let updateorderbyid =async(req,res)=>{
 
+}
 
 
 module.exports={
     showAllProduct:showAllProduct,
     addnewproduct:addnewproduct,
     updateProduct:updateProduct,
+    updateorderbyid:updateorderbyid,
+    updateorderpage:updateorderpage,
     searchuser:searchuser,
     searchproduct:searchproduct,
     searchorder:searchorder,

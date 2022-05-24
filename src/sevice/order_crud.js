@@ -90,16 +90,18 @@ let creatneworder = async(updateorder) =>{
     return new Promise(async(resolve,reject)=>{
         
         try {
-              
+            var date = new Date()
             let order = await db.order.findOne({
                 where:{
                     idproduct:updateorder.idproduct,
                     iduser:updateorder.iduser,
-                 }
+                    paymentmethob:null
+                  }
             })
+            console.log(date)
             let product = await db.product.findOne({
                 where:{
-                    id:updateorder.idproduct
+                    id:updateorder.idproduct 
                 }
             })
 
@@ -125,14 +127,33 @@ let creatneworder = async(updateorder) =>{
         }
     })
 }
-
-let showAllProductInCart = async(iduser,date)=>{
+let cartofuser = async(iduser)=>{
     return new Promise(async(resolve,reject)=>{
         try {
             let cart = await db.order.findAll(
               {
                 where: {
                     iduser:iduser,
+                    paymentmethob:"confirm"
+                }
+              }
+            )
+           // console.log("cart ",cart)
+            resolve(cart)
+        } catch(e) {
+            reject(e)
+        }
+    })
+}
+
+let showAllProductInCart = async(iduser)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            let cart = await db.order.findAll(
+              {
+                where: {
+                    iduser:iduser,
+                    paymentmethob:null
                 }
               }
             )
@@ -183,9 +204,12 @@ let productlistofcart =async (order) =>{
                 })
                  
                 result.push({
+                    id:order[i].dataValues.id,
+                    iduser:order[i].dataValues.iduser,
                     Name: product.dataValues.nameproduct,
                     cost:(order[i].dataValues.amount *product.dataValues.cost).toFixed(2),
                     amount:order[i].dataValues.amount,
+                    status:order[i].dataValues.paymentmethob,
                     Date : order[i].dataValues.createdAt,
                     description:product.dataValues.description
                 })
@@ -198,11 +222,71 @@ let productlistofcart =async (order) =>{
     })
 }
 
+let deleteorder = async (idorder)=>{
+    return new Promise(async (resovle,reject)=>{
+        try {
+            let order =  await db.order.destroy({
+                where:{
+                    id:idorder
+                }
+            })
+            resovle(order)
+        } catch(e) {
+            reject(e)
+        }
+        
+    })
+}
+
+let findorderbyid =async (idorder)=>{
+    return new Promise(async (resolve,reject)=>{
+        try {
+            let product = await db.order.findOne({
+                where:{
+                    iduser:idorder
+                }
+            })
+            resolve(product)
+        } catch(e) {
+            reject(e)
+        }
+       
+    })
+}
+
+let confirmorder = async (iduser)=>{
+    return new Promise(async(resolve,reject)=>{
+        try{
+            let orderlist = await db.order.findAll({
+                where :{
+                    paymentmethob:null,
+                    iduser:iduser
+                }
+            })
+            
+            orderlist.forEach(async (element) =>{
+                element.paymentmethob="confirm"
+                await element.save()
+            })
+
+            resolve(orderlist)
+        } catch(e) {
+            reject(e)
+        }
+        
+    })
+}
+
+
 module.exports = {
     showAllorders:showAllorders,
     findorderbyiduser:findorderbyiduser,
     showAllProductInCart:showAllProductInCart,
     creatneworder:creatneworder,
     totalcost:totalcost,
-    productlistofcart:productlistofcart
+    findorderbyid:findorderbyid,
+    productlistofcart:productlistofcart,
+    deleteorder:deleteorder,
+    cartofuser:cartofuser,
+    confirmorder:confirmorder
 }

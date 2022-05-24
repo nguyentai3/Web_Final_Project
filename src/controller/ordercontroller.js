@@ -5,9 +5,7 @@ import  jwttoken from '../sevice/jwttoken'
 import jwt from "jsonwebtoken"
 import usercrud from '../sevice/userservice'
 import db from"../models/index";
- 
- 
- 
+
 const querystring = require('query-string')
  
 let shoppingpage = ()=>{
@@ -101,9 +99,8 @@ let addproducttocart = async (req,res) =>{
 }
 
 let cartofuserbyid = async(req,res)=>{
-    let productlist = await ordercrud.showAllProductInCart(req.query.iduser)
-     
-    let result = await ordercrud.productlistofcart(productlist)
+    let productlist = await ordercrud.cartofuser(req.query.iduser)
+     let result = await ordercrud.productlistofcart(productlist)
 
     let total =  await  ordercrud.totalcost(productlist)
     total = total.toFixed(2) 
@@ -113,9 +110,10 @@ let cartofuserbyid = async(req,res)=>{
         total:total
     })*/
      
-    res.render("pages/Cart.ejs",{
+    res.render("pages/Cartofuser.ejs",{
+
         message:"them vao vo hang",
-        iduser:req.body.iduser,
+        iduser:req.query.iduser,
         productlist:result ,
         total:total
     }) 
@@ -163,8 +161,29 @@ let search = async(req,res)=>{
    
 }
 
-
-
+let confirmorder = async(req,res)=>{
+     
+    await ordercrud.confirmorder(req.body.iduser)
+    
+    let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
+             
+    let total =  await  ordercrud.totalcost(productlist)
+   total = total.toFixed(2) 
+  /* res.json({
+       message:"them vao vo hang",
+       productlist:productlist ,
+       total:total
+   })*/
+   let result = await ordercrud.productlistofcart(productlist)
+   res.render("pages/Cart.ejs",{
+       message:"them vao vo hang",
+       iduser:req.body.iduser,
+       productlist:result ,
+       total:total
+   })
+    
+}
+ 
 
 module.exports={
     Allitems:showitem,
@@ -174,5 +193,6 @@ module.exports={
     shoppingpage:shoppingpage,
     addproducttocart:addproducttocart,
     search:search,
+    confirmorder:confirmorder,
     cartofuserbyid:cartofuserbyid
 }

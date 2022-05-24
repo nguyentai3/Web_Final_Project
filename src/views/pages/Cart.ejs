@@ -17,22 +17,42 @@
 </head>
 <body>
     <h1>Total cost <%=total%>  Id user <%=iduser%></h1>
+    <form action="/api/user/cart/confirm" method="post">
+        <input value="<%=iduser%>" name="iduser" type="text"  style="display:none"/>
+
+       <input  value="Confirm" type="submit" class="btn-delete" />
+</form>
+ 
+ 
     <% for (var i = 0;i<productlist.length;i++) { %>
-    
-        <div class="card" style="width: 18rem;">
+
             
+           
+        
+
+        <div class="card" style="width: 18rem;">
             <div style="text-align:center">Id <%=productlist[i].id%></div>
+            
             <div class="card-body">
               <h5 class="card-title"> Name  <%=productlist[i].Name%></h5>
               <h5 class="card-title">  cost   <%=productlist[i].cost%></h5>
               <h5 class="card-title">  amount   <%=productlist[i].amount%></h5>
               <h5 class="card-title">  Date   <%=productlist[i].Date%></h5>
-                
-                 
+            
+ 
+
               <p class="card-text">  description  <%=productlist[i].description%></p> 
+                <form action="/api/user/cart/cancle">
+                    
+                    <input value="<%=productlist[i].id%>" name= "idorder" type="text " style="display:none"/>
+                    <input value="<%=iduser%>" name="iduser" type="text"  style="display:none"/>
+                    <input  value="cancle" type="submit" class="btn-delete" />
+                </form>
             </div>
           </div>
           <br>
     <%}%>
+        
+
 </body>
 </html>

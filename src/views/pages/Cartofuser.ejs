@@ -16,6 +16,8 @@
     <title>Login Page</title>
 </head>
 <body>
+    <h1>History of shopping</h1>
+
     <h1>Total cost <%=total%>  Id user <%=iduser%></h1>
     <% for (var i = 0;i<productlist.length;i++) { %>
     
@@ -27,7 +29,7 @@
               <h5 class="card-title">  cost   <%=productlist[i].cost%></h5>
               <h5 class="card-title">  amount   <%=productlist[i].amount%></h5>
               <h5 class="card-title">  Date   <%=productlist[i].Date%></h5>
-                
+              <h5 class="card-title">  status   <%=productlist[i].status%></h5>
                  
               <p class="card-text">  description  <%=productlist[i].description%></p> 
             </div>
