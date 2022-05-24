@@ -100,7 +100,7 @@ let addproducttocart = async (req,res) =>{
 
 let cartofuserbyid = async(req,res)=>{
     let productlist = await ordercrud.cartofuser(req.query.iduser)
-     let result = await ordercrud.productlistofcart(productlist)
+    let result = await ordercrud.productlistofcart(productlist)
 
     let total =  await  ordercrud.totalcost(productlist)
     total = total.toFixed(2) 

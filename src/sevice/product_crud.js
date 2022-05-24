@@ -39,12 +39,12 @@ let isdeleteproduct = async(product)=>{
 }
 
 
-let updateproduct = async(newproduct)=>{
+let updateproduct = async(id)=>{
     return new Promise(async (resolve,reject)=>{
         try {
             let updateProduct = await db.product.findOne({
                 where:{
-                    id :newproduct.id
+                    id :id
                 }
             })
             if (updateProduct) {

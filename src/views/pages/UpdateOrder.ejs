@@ -18,10 +18,10 @@
 <body>
     
     <table>
-        <form>
+        <form action="/api/admin/handleupdateorder" method="post">
         <tr>
             <td>Id Order</td>
-            <td><input value="<%=order.dataValues.id%>" readonly /></td>
+            <td><input value="<%=order.dataValues.id%>" name="id" readonly /></td>
         </tr>
 
         <tr>
@@ -46,7 +46,13 @@
 
         <tr>
             <td>Payment method</td>
-            <td><input value="<%=order.dataValues.paymentmethob%>"   /></td>
+            <td>
+                <select name="paymentmethob" id="paymentmethob">
+                    <option value="<%=order.dataValues.paymentmethob%>"><%=order.dataValues.paymentmethob%></option>
+                    <option value="Shipping">Shipping</option>
+                     
+                  </select>
+            </td>
         </tr>
 
         <tr>
@@ -54,8 +60,12 @@
             <td><input value="<%=order.dataValues.updatedAt%>" readonly /></td>
         </tr>
 
-        
+        <tr>
+            <td>
         <input type="submit" value="update"/>
+
+            </td>
+        </tr>
 
     </table>
 </form>

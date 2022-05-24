@@ -27,7 +27,7 @@ let showAllorders = async ()=>{
                             Name: product.nameproduct,
                             cost:(list[i].amount *product.cost).toFixed(2),
                             amount:list[i].amount,
-                            phone:user.dataValues.phone,
+                            //phone:user.dataValues.phone,
                             createdAt:list[i].createdAt,
                             paymentmethob:list[i].paymentmethob,
                             updatedAt:list[i].updatedAt,
@@ -134,11 +134,15 @@ let cartofuser = async(iduser)=>{
               {
                 where: {
                     iduser:iduser,
-                    paymentmethob:"confirm"
+                    [Op.or]: [
+                        { paymentmethob: "confirm" },
+                        { paymentmethob: "Shipping" }
+                      ]
+                     
                 }
               }
             )
-           // console.log("cart ",cart)
+            console.log("cart ",cart)
             resolve(cart)
         } catch(e) {
             reject(e)

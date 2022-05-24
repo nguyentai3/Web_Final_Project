@@ -83,9 +83,13 @@ let initwebroute = (app) =>{
 
     router.post("/api/user/cart/confirm",ordercontroller.confirmorder)
 
-    router.get('/api/user/homepage')
+    router.get('/api/admin/updateproductpage',admincontroller.updateproductpage)
 
-    router.get('/api/admin/updateorderpage',admincontroller.updateorderpage)
+    router.post('/api/admin/handleproductupdate',admincontroller.handleproductupdate)
+
+    router.get("/api/admin/updateorderpage",admincontroller.updateorderpage)
+
+    router.post('/api/admin/handleupdateorder',admincontroller.handleorderupdate)
 
     return app.use("/",router);
 }

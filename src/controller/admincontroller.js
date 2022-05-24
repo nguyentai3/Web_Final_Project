@@ -2,6 +2,7 @@ import product_crud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
 import crudservice from '../sevice/userservice'
 import user_crud from '../sevice/userservice'
+import db from '../models'
 
 let addnewproduct = async(req,res)=>{
     let productlist = await producCrud.addnewproduct(req.body)
@@ -117,14 +118,83 @@ let handlecreateproduct = async (req,res)=>{
     })
 }
 
+let updateproductpage = async (req,res)=>{
+    let order = await db.product.findOne({
+        where :{
+            id:req.query.id
+        }
+    })
+    console.log(order)
+    res.render('pages/Updateproductpage.ejs',{
+         
+        product: order
+    })
+}
+ 
+let handleproductupdate= async (req,res)=>{
+    let updateproduct = await db.product.findOne({
+        where:{
+            id:req.body.id
+        }
+    })
+    updateproduct.set({
+        nameproduct:req.body.nameproduct,
+        quantity:req.body.quantity,
+        cost:req.body.cost,
+        description:req.body.description
+
+    })
+    await updateproduct.save()
+    
+    let produtcs = await product_crud.getAllProduct();
+
+     res.render("pages/Admin_product.ejs",{
+ 
+        productlist:produtcs,
+ 
+    })
+
+}
+
+
+
 let updateorderpage = async (req,res)=>{
-     let order = await orders_crud.findorderbyid(req.query.id)
+    let order = await db.order.findOne({
+        where :{
+            id:req.query.id
+        }
+    })
+    console.log(order)
     res.render('pages/UpdateOrder.ejs',{
-        iduser:req.query.id,
+         
         order: order
     })
 }
  
+let handleorderupdate= async (req,res)=>{
+    let updateorder = await db.order.findOne({
+        where:{
+            id:req.body.id
+        }
+    })
+   
+    await updateorder.set({
+        paymentmethob:req.body.paymentmethob
+
+    })
+    await updateorder.save()
+    
+    console.log(updateorder)
+
+    let orderlist = await orders_crud.showAllorders();
+    res.render("pages/Admin_order.ejs",{
+
+
+       orderlist:orderlist,
+       
+   })
+
+}
 let updateorderbyid =async(req,res)=>{
 
 }
@@ -133,9 +203,11 @@ let updateorderbyid =async(req,res)=>{
 module.exports={
     showAllProduct:showAllProduct,
     addnewproduct:addnewproduct,
+    handleorderupdate:handleorderupdate,
+    updateorderpage:updateorderpage,
     updateProduct:updateProduct,
     updateorderbyid:updateorderbyid,
-    updateorderpage:updateorderpage,
+    updateproductpage:updateproductpage,
     searchuser:searchuser,
     searchproduct:searchproduct,
     searchorder:searchorder,
@@ -143,5 +215,6 @@ module.exports={
     displayallorder:displayallorder,
     handlecreateproduct:handlecreateproduct,
     displayallproduct:displayallproduct,
+    handleproductupdate:handleproductupdate,
     displayalluser:displayalluser 
 }
