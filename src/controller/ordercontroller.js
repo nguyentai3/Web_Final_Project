@@ -163,8 +163,8 @@ let search = async(req,res)=>{
 
 let confirmorder = async(req,res)=>{
      
-    await ordercrud.confirmorder(req.body.iduser)
-    
+    let a=  await ordercrud.confirmorder(req.body.iduser)
+    console.log("asds    ",a)
     let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
              
     let total =  await  ordercrud.totalcost(productlist)

@@ -2,7 +2,7 @@ import { promise, reject } from "bcrypt/promises";
 import db from"../models/index";
 import user_crud from'../sevice/userservice'
 const { Op } = require("sequelize");
- 
+import productcrud from'../sevice/product_crud'
 let showAllorders = async ()=>{
     return new Promise(async (resolve,reject)=>{
         try {
@@ -265,6 +265,14 @@ let confirmorder = async (iduser)=>{
             })
             
             orderlist.forEach(async (element) =>{
+                
+                let product =await productcrud.findProductbyId(element.dataValues.idproduct)
+                 
+               let a  = product.dataValues.quantity - element.dataValues.amount
+                await product.set({
+                    quantity:a
+                })
+                await product.save()
                 element.paymentmethob="confirm"
                 await element.save()
             })
