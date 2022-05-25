@@ -43,10 +43,10 @@ let addproducttocart = async (req,res) =>{
                 amount: parseInt(req.body.amount)
             }
              
-        
-            await ordercrud.creatneworder(neworder)
+            console.log(neworder)
+            let order1 =  await ordercrud.creatneworder(neworder)
             //a[i].dataValues.iduser
-            
+            console.log(order1)
             let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
              
              let total =  await  ordercrud.totalcost(productlist)

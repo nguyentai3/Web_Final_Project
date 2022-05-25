@@ -8,7 +8,7 @@ require('dotenv').config()
 let authenloginuser = async(req,res,next)=>{
      
     let token  = req.body.token || req.query.token || req.headers['access-token']
-    if (!token) {
+     if (!token) {
         return res.status(403).send("A token is required for authentication");
     }
     else {
@@ -23,7 +23,7 @@ let authenloginuser = async(req,res,next)=>{
         }
          
        
-      } catch(err) {
+        } catch(err) {
         return res.status(401).json({message:"Invalid token"})
       }
         

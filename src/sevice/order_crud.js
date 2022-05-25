@@ -90,28 +90,39 @@ let creatneworder = async(updateorder) =>{
     return new Promise(async(resolve,reject)=>{
         
         try {
-            var date = new Date()
-            let order = await db.order.findOne({
+             let order = await db.order.findOne({
                 where:{
                     idproduct:updateorder.idproduct,
                     iduser:updateorder.iduser,
                     paymentmethob:null
                   }
             })
-            console.log(date)
-            let product = await db.product.findOne({
+             let product = await db.product.findOne({
                 where:{
                     id:updateorder.idproduct 
                 }
             })
+            console.log(product)
+            console.log(order)
+           // if (product.dataValues.quantity >= order)
 
             if (order) {
-                order.amount = updateorder.amount
-                product.amount -= order.amount
+                if (product.dataValues.quantity > updateorder.amount) {
+                order.dataValues.amount = updateorder.amount
+                product.dataValues.quantity -= updateorder.amount
                 await product.save()
                 let a = await order.save()
                 resolve(a)
-            } else {
+                } else {
+                    order.dataValues.amount = product.dataValues.quantity
+                    product.dataValues.quantity -= product.dataValues.quantity
+                    await product.save()
+                    let b = await order.save()
+                    resolve(b)
+                }
+            }  
+            
+            else {
                 let newoder  =await db.order.create({
                 
                     idproduct: updateorder.idproduct,
@@ -271,14 +282,28 @@ let confirmorder = async (iduser)=>{
             orderlist.forEach(async (element) =>{
                 
                 let product =await productcrud.findProductbyId(element.dataValues.idproduct)
-                 
-               let a  = product.dataValues.quantity - element.dataValues.amount
-                await product.set({
-                    quantity:a
-                })
-                await product.save()
-                element.paymentmethob="confirm"
-                await element.save()
+                let a  = product.dataValues.quantity - element.dataValues.amount
+                if ( a >= 0) {
+                    await product.set({
+                        quantity:a
+                    })
+                    await product.save()
+                    element.paymentmethob="confirm"
+                    await element.save()
+                } else {
+                    await product.set({
+                        quantity:0
+                    })
+                    await product.save()
+                    element.paymentmethob="confirm"
+                    element.amount = product.quantity
+                    await element.save()
+                }
+
+
+
+                
+                
             })
 
             resolve(orderlist)

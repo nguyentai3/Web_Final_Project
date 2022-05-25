@@ -103,25 +103,26 @@ let handlesignin = async (req,res)=>{
     let user = await crudservice.createuser(userdata)
     
      
+    
+ 
     let token = await jwttoken.createjwttoken(user)
 
     const decode = jwt.decode(token)
 
     let productlist = await producCrud.getAllProduct()
-     
-    //console.log(user)
-    
-    if (user.dataValues.roleid ==='USER') {
-        return res.render('pages/Shopping.ejs',{
+ 
+    console.log(decode)  
+      /*  return res.render('pages/Shopping.ejs',{
             id:user.dataValues.id,
             token :token,
             productlist :productlist
     
-        })
+        })*/
+        res.redirect('/api/login')
     
 
 
-}
+
 }
  
 
