@@ -91,6 +91,9 @@ let initwebroute = (app) =>{
 
     router.post('/api/admin/handleupdateorder',admincontroller.handleorderupdate)
 
+    router.get("/crud/deleteorder",admincontroller.handledeleteorder)
+
+    router.get("/crud/deleteproduct",admincontroller.handledeleteproduct)
     return app.use("/",router);
 }
 

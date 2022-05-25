@@ -199,9 +199,41 @@ let updateorderbyid =async(req,res)=>{
 
 }
 
+let handledeleteorder = async(req,res)=>{
+    await db.order.destroy({
+        where:{
+            id:req.query.id
+        }
+    })
+    
+     
+
+    let orderlist = await orders_crud.showAllorders();
+    res.render("pages/Admin_order.ejs",{
+        orderlist:orderlist,
+        
+    })
+}
+
+let handledeleteproduct = async (req,res)=>{
+    await db.product.destroy({
+        where:{
+            id:req.query.id
+        }
+    })
+    let product = await db.product.findAll()
+     res.render("pages/Admin_product.ejs",{
+ 
+ 
+        productlist:product,
+        
+    })
+}
 
 module.exports={
     showAllProduct:showAllProduct,
+    handledeleteorder:handledeleteorder,
+    handledeleteproduct:handledeleteproduct,
     addnewproduct:addnewproduct,
     handleorderupdate:handleorderupdate,
     updateorderpage:updateorderpage,

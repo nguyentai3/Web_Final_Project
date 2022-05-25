@@ -70,7 +70,7 @@ let findorderbyiduser= async(idorder) =>{
                         Name: product.nameproduct,
                         cost:(list[i].amount *product.cost).toFixed(2),
                         amount:list[i].amount,
-                        phone:user.dataValues.phone,
+                       // phone:user.dataValues.phone,
                         createdAt:list[i].createdAt,
                         paymentmethob:list[i].paymentmethob,
                         updatedAt:list[i].updatedAt,
@@ -242,7 +242,7 @@ let deleteorder = async (idorder)=>{
         try {
             let order =  await db.order.destroy({
                 where:{
-                    id:idorder
+                    id:req.query.idorder
                 }
             })
             resovle(order)
@@ -314,6 +314,7 @@ let confirmorder = async (iduser)=>{
     })
 }
 
+ 
 
 module.exports = {
     showAllorders:showAllorders,

@@ -151,8 +151,8 @@
                        <td><%=productlist[i].dataValues.createdAt%></td> 
                        <td><%=productlist[i].dataValues.updatedAt%></td> 
                         <td> 
-                            <a href="/api/admin/updateproductpage?id=<%= productlist[i].dataValues.id %>" class="btn-edit" type="button">Edit</a>
-                            <a href="/crud/delete?id=<%=productlist[i].dataValues.id%>" class="btn-delete" type="button">delete</a>
+                            <a href="/api/admin/updateproductpage?idproduct=<%= productlist[i].dataValues.id %>" class="btn-edit" type="button">Edit</a>
+                            <a href="/crud/deleteproduct?id=<%=productlist[i].dataValues.id%>" class="btn-delete" type="button">delete</a>
                             
                         </td>
     
