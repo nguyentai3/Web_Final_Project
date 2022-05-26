@@ -17,20 +17,29 @@ let handlelogin = async (req,res)=>{
      
     //check missing inputs
     if (!email || !password) {
-        return res.status(500).json({
-            errcode:1,
+        return res.render('pages/login.ejs',{
             message:"missing input"
+    
         })
     }
     //check email exist
 
     let userdata  = await userservice.handleuserlogin(email,password)
      
-    console.log(userdata)
-
-    let token =  jwttoken.createjwttoken(userdata)
+    /*
+         userdata.errcode=4
+                        userdata.message="password is wrong"
+                         
+                        resovle(userdata)
+    */
+    if (userdata.errcode == 4) {
+        return res.render('pages/login.ejs',{
+            message:userdata.message
     
- 
+        })
+    } else { 
+    console.log(userdata)
+    let token =  jwttoken.createjwttoken(userdata)
     token = await jwttoken.createjwttoken(userdata)
 
     const decode = jwt.decode(token)
@@ -44,17 +53,12 @@ let handlelogin = async (req,res)=>{
             productlist :productlist
     
         })
-      
     } else   {
         let list = await crudservice.getalluser();
         let produtcs = await producCrud.getAllProduct();
         let orderlist = await orders_crud.showAllorders();
-
         let result = []
-
-
         for (var i =0;i<orderlist.lenght;i++) {
-
         let product = await producCrud.findProductbyId(orderlist[i].idproduct)
         let cost = product.dataValues.cost * orderlist[i].amount
 
@@ -78,7 +82,7 @@ let handlelogin = async (req,res)=>{
         token:token
     })  
     } 
-    
+}
        /* 
     res.status(200).json({
         message:"sản phẩm hiện có",

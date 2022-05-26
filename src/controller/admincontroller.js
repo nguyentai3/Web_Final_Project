@@ -23,7 +23,7 @@ let showAllProduct = async (req,res)=>{
 }
 
 let updateProduct = async (req,res)=>{
-    let newproduct = await producCrud.updateproduct(req.body)
+    let newproduct = await product_crud.updateproduct(req.query.idproduct)
     res.status(200).json({
         result:newproduct
     })
@@ -132,6 +132,7 @@ let updateproductpage = async (req,res)=>{
 }
  
 let handleproductupdate= async (req,res)=>{
+     
     let updateproduct = await db.product.findOne({
         where:{
             id:req.body.idproduct
@@ -162,7 +163,7 @@ let updateorderpage = async (req,res)=>{
     console.log()
     let order = await db.order.findOne({
         where :{
-            id:req.query.id
+            id:req.body.id
         }
     })
     console.log(order)

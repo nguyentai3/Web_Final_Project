@@ -7,7 +7,7 @@ let showAllorders = async ()=>{
     return new Promise(async (resolve,reject)=>{
         try {
             let list = await db.order.findAll({
-                raw:true
+                 
             })
             
              
@@ -22,15 +22,13 @@ let showAllorders = async ()=>{
                             }
                         })
                          
-                        console.log("product   ",product)
-                        
+                         
                         let user = await db.User.findOne({
                             where:{
                                 id:list[i].iduser
                             }
                         })
-                        console.log("user  ",user)
-                        console.log("list  ",list[i])
+                         
                         result.push({
                             id:list[i].id,
                             iduser:list[i].iduser,
@@ -113,14 +111,16 @@ let creatneworder = async(updateorder) =>{
                     id:updateorder.idproduct 
                 }
             })
-            console.log(product)
-            console.log(order)
-           // if (product.dataValues.quantity >= order)
+             
+            
 
             if (order) {
                 if (product.dataValues.quantity > updateorder.amount) {
+                    console.log("quantity",product.dataValues.quantity)
+
                 order.dataValues.amount = updateorder.amount
                 product.dataValues.quantity -= updateorder.amount
+                
                 await product.save()
                 let a = await order.save()
                 resolve(a)
