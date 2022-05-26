@@ -9,29 +9,40 @@ let showAllorders = async ()=>{
             let list = await db.order.findAll({
                 raw:true
             })
+            
              
+
             let result = []
                     for (var i =0;i<list.length;i++) {
+                        console.log(list[i].idproduct)
                         let product = await db.product.findOne({
                             where:{
                                 id:list[i].idproduct
+                            
                             }
                         })
                          
-                        let user = await user_crud.getuserbyid(list[i].iduser)
-
+                        console.log("product   ",product)
+                        
+                        let user = await db.User.findOne({
+                            where:{
+                                id:list[i].iduser
+                            }
+                        })
+                        console.log("user  ",user)
+                        console.log("list  ",list[i])
                         result.push({
                             id:list[i].id,
                             iduser:list[i].iduser,
                             
-                            Name: product.nameproduct,
-                            cost:(list[i].amount *product.cost).toFixed(2),
+                            Name: product.dataValues.nameproduct,
+                            cost:(list[i].amount *product.dataValues.cost).toFixed(2),
                             amount:list[i].amount,
-                            //phone:user.dataValues.phone,
+                         //   phone:user.dataValues.phone,
                             createdAt:list[i].createdAt,
                             paymentmethob:list[i].paymentmethob,
                             updatedAt:list[i].updatedAt,
-                            description:product.description
+                            description:product.dataValues.description
                         })
                     }
                     
@@ -242,7 +253,7 @@ let deleteorder = async (idorder)=>{
         try {
             let order =  await db.order.destroy({
                 where:{
-                    id:req.query.idorder
+                    id:idorder
                 }
             })
             resovle(order)

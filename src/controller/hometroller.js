@@ -1,7 +1,7 @@
 
  
  import crudservice from"../sevice/crud_user";
-import newuser from'../sevice/crud_user'
+ 
 import db from"../models/index"
 import product_crud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
@@ -121,11 +121,8 @@ let handlelogin = (req,res)=>{
     
 }
 
-
-
-
 module.exports = {
-    //key,value
+    
     gethomepage : gethomepage,
     getpersonalpage:getpersonalpage,
     crud:crud,
