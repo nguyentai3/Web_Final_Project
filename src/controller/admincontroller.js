@@ -3,6 +3,8 @@ import orders_crud from '../sevice/order_crud'
 import crudservice from '../sevice/userservice'
 import user_crud from '../sevice/userservice'
 import db from '../models'
+const formidable  =require('formidable')
+
 
 let addnewproduct = async(req,res)=>{
     let productlist = await producCrud.addnewproduct(req.body)
@@ -99,6 +101,7 @@ let creatproductpage = async(req,res)=>{
 }
 
 let handlecreateproduct = async (req,res)=>{
+    
     let newproduct = {
         nameproduct:req.body.nameproduct,
         quantity:req.body.quantity,
@@ -106,6 +109,11 @@ let handlecreateproduct = async (req,res)=>{
         description:req.body.description
     }
     
+    
+    console.log("fields ",req.fields)
+    console.log("files ",req.files)
+
+
     await product_crud.createpruduct(newproduct)
 
 
@@ -115,19 +123,20 @@ let handlecreateproduct = async (req,res)=>{
  
         productlist:produtcs,
  
-    })
+    })                                        
+
 }
 
-let updateproductpage = async (req,res)=>{
-    let order = await db.product.findOne({
+let updateproductpage = async (req,res,next)=>{
+    let product = await db.product.findOne({
         where :{
             id:req.query.idproduct
         }
     })
-    console.log(order)
+    console.log(product)
     res.render('pages/Updateproductpage.ejs',{
          
-        product: order
+        product: product
     })
 }
  
@@ -220,7 +229,7 @@ let handledeleteorder = async(req,res)=>{
 let handledeleteproduct = async (req,res)=>{
     await db.product.destroy({
         where:{
-            id:req.query.id
+            id:req.query.idproduct
         }
     })
     let product = await db.product.findAll()

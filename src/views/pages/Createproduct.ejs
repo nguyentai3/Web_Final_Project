@@ -101,7 +101,7 @@ body {
     </div>
   </nav>
  <h1 style="color:white">Create product</h1>
-        <form action="/api/handlecreateproduct" method="post">
+        <form action="/api/handlecreateproduct" method="post" enctype="multipart/form-data">'> 
          
           <div>
             Name  <input type="text" name="nameproduct" placeholder="Name product" />
@@ -113,7 +113,8 @@ body {
           </div>
           Decription  <input type="text" name="description" placeholder="Description"  />
            <div>
-           
+            <div>File: <input type="file" name="fileiamgeofproduct" multiple="multiple" /></div>
+
             <button type="submit" class="btn btn-primary">Sign in</button>
 
         </form>

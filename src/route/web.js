@@ -74,7 +74,7 @@ let initwebroute = (app) =>{
 
 
     router.get("/api/createproduct",admincontroller.creatproductpage)
-    router.post("/api/handlecreateproduct",admincontroller.handlecreateproduct)
+    router.post("/api/handlecreateproduct",auth.handleupfile,admincontroller.handlecreateproduct)
 
  
     router.get("/api/admin/updateproduct")

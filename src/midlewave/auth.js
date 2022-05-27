@@ -94,8 +94,25 @@ let authenuertopurchase = async (req,res,next)=>{
 
 }
 
+let handleupfile = async(req,res,next) =>{
+  if (req.url == '/fileupload') {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.filepath;
+      var newpath = 'C:/Users/Your Name/' + files.filetoupload.originalFilename;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        req.fields;  
+        req.files;
+      });
+ });
+  next()
+}
+}
+
 module.exports = {
   authenloginuser:authenloginuser,
   authenloginadmin:authenloginadmin,
-  authenuertopurchase:authenuertopurchase
+  authenuertopurchase:authenuertopurchase,
+  handleupfile:handleupfile
 }
