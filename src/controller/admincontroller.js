@@ -101,7 +101,8 @@ let creatproductpage = async(req,res)=>{
 }
 
 let handlecreateproduct = async (req,res)=>{
-    
+     
+
     let newproduct = {
         nameproduct:req.body.nameproduct,
         quantity:req.body.quantity,
@@ -109,10 +110,19 @@ let handlecreateproduct = async (req,res)=>{
         description:req.body.description
     }
     
+    if (req.url == '/fileupload') {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+          var oldpath = files.filetoupload.filepath;
+          var newpath = 'C:/Users/Your Name/' + files.filetoupload.originalFilename;
+          fs.rename(oldpath, newpath, function (err) {
+            if (err) throw err;
+            res.write('File uploaded and moved!');
+            res.end();
+          });
+        });
+    }
     
-    console.log("fields ",req.fields)
-    console.log("files ",req.files)
-
 
     await product_crud.createpruduct(newproduct)
 
@@ -169,15 +179,14 @@ let handleproductupdate= async (req,res)=>{
 
 
 let updateorderpage = async (req,res)=>{
-    console.log()
+     
     let order = await db.order.findOne({
         where :{
-            id:req.body.id
+            id:req.query.id
         }
     })
-    console.log(order)
+     
     res.render('pages/UpdateOrder.ejs',{
-         
         order: order
     })
 }

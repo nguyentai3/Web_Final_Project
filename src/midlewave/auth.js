@@ -104,10 +104,13 @@ let handleupfile = async(req,res,next) =>{
         if (err) throw err;
         req.fields;  
         req.files;
+        
       });
- });
-  next()
-}
+      next()
+      console.log(req.fields)
+      console.log(req.files)
+    });}
+  
 }
 
 module.exports = {
