@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
     <script type="text">
@@ -116,11 +117,13 @@ body {
               
               <%
               for (var i=0;i<productlist.length;i++) {%>
-    
+                
+                <img src="../../public/83.jpg" />
                   <div class="flip-card" style="margin-top: 100px;text-align: center">
                       <div class="flip-card-inner">
                         <div class="flip-card-front">
                             <h2><%=productlist[i].dataValues.nameproduct%></h2>
+                            <img src="%=productlist[i].dataValues.id%>.jpg" />
                         </div>
                         <div class="flip-card-back">
                           <form action="/api/addproducttocart" method="post" >

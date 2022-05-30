@@ -1,9 +1,10 @@
 import express from"express"
- import usercontroller from "../controller/usercontroller"
+import usercontroller from "../controller/usercontroller"
 import homepage from "../controller/hometroller"
 import auth from'../midlewave/auth'
 import ordercontroller from '../controller/ordercontroller'
 import admincontroller from '../controller/admincontroller'
+ 
 let router = express.Router();
 
 let initwebroute = (app) =>{
@@ -14,13 +15,10 @@ let initwebroute = (app) =>{
 
     router.post("/crud/post",homepage.crudprocesssingin)
 
-
+    router.get("/AI/checkmodels",homepage.AI)
     
 
     router.get("/crud/get",homepage.displayalluser)
-
-
-
 
     router.get("/crud/checkuser",homepage.checkuserbyid)
 
@@ -74,7 +72,7 @@ let initwebroute = (app) =>{
 
 
     router.get("/api/createproduct",admincontroller.creatproductpage)
-    router.post("/api/handlecreateproduct",auth.handleupfile,admincontroller.handlecreateproduct)
+    router.post("/api/handlecreateproduct" , admincontroller.handlecreateproduct)
 
  
     router.get("/api/admin/updateproduct")
@@ -85,7 +83,7 @@ let initwebroute = (app) =>{
 
     router.get('/api/admin/updateproductpage',admincontroller.updateproductpage)
 
-    router.post('/api/admin/handleproductupdate',auth.handleupfile,admincontroller.handleproductupdate)
+    router.post('/api/admin/handleproductupdate',admincontroller.handleproductupdate)
 
     router.get("/api/admin/updateorderpage",admincontroller.updateorderpage)
 
@@ -94,6 +92,11 @@ let initwebroute = (app) =>{
     router.get("/crud/deleteorder",admincontroller.handledeleteorder)
 
     router.get("/crud/deleteproduct",admincontroller.handledeleteproduct)
+
+    router.post("/amid/uploadimage",admincontroller.handleupload)
+
+
+
     return app.use("/",router);
 }
 

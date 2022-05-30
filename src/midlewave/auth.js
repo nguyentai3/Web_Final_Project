@@ -3,7 +3,9 @@ import jwt from "jsonwebtoken"
 import res from 'express/lib/response';
 import  jwttoken from '../sevice/jwttoken'
 import ordercrud from'../sevice/order_crud'
-
+const fs = require('fs');
+var path = require('path');
+const formidable  =require('formidable')
 require('dotenv').config()
 let authenloginuser = async(req,res,next)=>{
      
@@ -95,22 +97,17 @@ let authenuertopurchase = async (req,res,next)=>{
 }
 
 let handleupfile = async(req,res,next) =>{
-  if (req.url == '/fileupload') {
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-      var oldpath = files.filetoupload.filepath;
-      var newpath = 'C:/Users/Your Name/' + files.filetoupload.originalFilename;
-      fs.rename(oldpath, newpath, function (err) {
-        if (err) throw err;
-        req.fields;  
-        req.files;
-        
-      });
-      next()
-      console.log(req.fields)
-      console.log(req.files)
-    });}
-  
+  const form = new formidable.IncomingForm()
+
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    next()
+
+    res.json({ fields, files });
+  });
 }
 
 module.exports = {

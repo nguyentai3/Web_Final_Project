@@ -3,6 +3,11 @@ import orders_crud from '../sevice/order_crud'
 import crudservice from '../sevice/userservice'
 import user_crud from '../sevice/userservice'
 import db from '../models'
+import uploadfile from '../sevice/uploadfile'
+const fs = require('fs');
+
+ 
+var path = require('path');
 const formidable  =require('formidable')
 
 
@@ -100,8 +105,7 @@ let creatproductpage = async(req,res)=>{
     res.render("pages/Createproduct.ejs")
 }
 
-let handlecreateproduct = async (req,res)=>{
-     
+let handlecreateproduct = async (req,res)=>{ 
 
     let newproduct = {
         nameproduct:req.body.nameproduct,
@@ -110,22 +114,12 @@ let handlecreateproduct = async (req,res)=>{
         description:req.body.description
     }
     
-    if (req.url == '/fileupload') {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-          var oldpath = files.filetoupload.filepath;
-          var newpath = 'C:/Users/Your Name/' + files.filetoupload.originalFilename;
-          fs.rename(oldpath, newpath, function (err) {
-            if (err) throw err;
-            res.write('File uploaded and moved!');
-            res.end();
-          });
-        });
-    }
+        
     
+  
+     
 
     await product_crud.createpruduct(newproduct)
-
 
     let produtcs = await product_crud.getAllProduct();
 
@@ -133,7 +127,7 @@ let handlecreateproduct = async (req,res)=>{
  
         productlist:produtcs,
  
-    })                                        
+    })                                    
 
 }
 
@@ -160,6 +154,7 @@ let handleproductupdate= async (req,res)=>{
     updateproduct.set({
         nameproduct:req.body.nameproduct,
         quantity:req.body.quantity,
+
         cost:req.body.cost,
         description:req.body.description
 
@@ -175,8 +170,6 @@ let handleproductupdate= async (req,res)=>{
     })
 
 }
-
-
 
 let updateorderpage = async (req,res)=>{
      
@@ -250,7 +243,31 @@ let handledeleteproduct = async (req,res)=>{
     })
 }
 
+let handleupload= async (req,res)=>{
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('fileBegin', function   (name, file){
+         
+        file.originalFilename = req.query.idproduct+".jpg"
+        file.filepath = 'C:\\Users\\Dell-3580\\Desktop\\finalweb\\react+node\\Nodejs\\src\\public\\'+file.originalFilename;
+        console.log(file.filepath)
+    });
+
+    let product = await db.product.findAll()
+    res.render("pages/Admin_product.ejs",{
+
+
+   productlist:product
+   
+})
+
+}
+
+
 module.exports={
+    handleupload:handleupload,
     showAllProduct:showAllProduct,
     handledeleteorder:handledeleteorder,
     handledeleteproduct:handledeleteproduct,

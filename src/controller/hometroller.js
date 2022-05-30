@@ -120,9 +120,13 @@ let deleteuserbyid = async (req,res)=>{
 let handlelogin = (req,res)=>{
     
 }
+let AI =   (req,res)=>{
+    res.render('AI.ejs')
+}
+
 
 module.exports = {
-    
+    AI:AI,
     gethomepage : gethomepage,
     getpersonalpage:getpersonalpage,
     crud:crud,

@@ -17,6 +17,8 @@ let getAllProduct = async () =>{
 let createpruduct = async (product) =>{
     return new Promise(async (resolve,reject)=>{
         try {
+            
+
             let newproduct = await db.product.create({
                 nameproduct: product.nameproduct,
                 quantity: product.quantity,

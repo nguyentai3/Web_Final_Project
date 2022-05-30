@@ -7,10 +7,11 @@ import cors from 'cors'
 var cookieparser = require('cookie-parser')
 require('dotenv').config()
 
+var path = require('path');
 
 let app = express()
 
-
+ 
 app.use(cors())
 app.use(cookieparser())
 app.options('/', cors())

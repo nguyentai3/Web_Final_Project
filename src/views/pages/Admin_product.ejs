@@ -150,6 +150,12 @@
                        <td><%=productlist[i].dataValues.description%></td> 
                        <td><%=productlist[i].dataValues.createdAt%></td> 
                        <td><%=productlist[i].dataValues.updatedAt%></td> 
+                       <td>
+                         <form enctype="multipart/form-data" method="post" action="/amid/uploadimage?idproduct=<%=productlist[i].dataValues.id%>" >
+                          <input type="file" name="upload" multiple>
+                          <input type="submit" value="Upload">
+                         </form>
+                       </td>
                         <td> 
                             <a href="/api/admin/updateproductpage?idproduct=<%= productlist[i].dataValues.id %>" class="btn-edit" type="button">Edit</a>
                             <a href="/crud/deleteproduct?idproduct=<%= productlist[i].dataValues.id %>" class="btn-edit" type="button">Delte</a>
