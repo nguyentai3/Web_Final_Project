@@ -1,5 +1,5 @@
 import express from 'express';
-
+var path = require('path');
 
 let configViewEngine =  (app) =>{
     app.use(express.static("./src/public"));

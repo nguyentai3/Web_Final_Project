@@ -250,7 +250,7 @@ let handleupload= async (req,res)=>{
 
     form.on('fileBegin', function   (name, file){
          
-        file.originalFilename = req.query.idproduct+".jpg"
+        file.originalFilename = req.query.idproduct+".jpeg"
         file.filepath = 'C:\\Users\\Dell-3580\\Desktop\\finalweb\\react+node\\Nodejs\\src\\public\\'+file.originalFilename;
         console.log(file.filepath)
     });
