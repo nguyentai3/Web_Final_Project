@@ -8,7 +8,9 @@ import orders_crud from '../sevice/order_crud'
 import db from '../models';
 
 let loginpage =(req,res) =>{
-    res.render("pages/login.ejs")
+    res.render("pages/login.ejs",{
+        message:""
+    })
 }
 
 let handlelogin = async (req,res)=>{
@@ -106,28 +108,25 @@ let handlesignin = async (req,res)=>{
  
     let user = await crudservice.createuser(userdata)
     
-     
-    
- 
-    let token = await jwttoken.createjwttoken(user)
+    let token =  jwttoken.createjwttoken(user)
+    token = await jwttoken.createjwttoken(user)
 
     const decode = jwt.decode(token)
 
     let productlist = await producCrud.getAllProduct()
- 
-    console.log(decode)  
-      /*  return res.render('pages/Shopping.ejs',{
-            id:user.dataValues.id,
+     
+    if (userdata.user.roleid ==='USER') {
+        return res.render('pages/Shopping.ejs',{
+            id:decode.userdata.user.id,
             token :token,
             productlist :productlist
     
-        })*/
-        res.redirect('/api/login')
+        })
     
 
 
 
-}
+}}
  
 
 

@@ -1,25 +1,26 @@
 
  
  import crudservice from"../sevice/crud_user";
- 
-import db from"../models/index"
+ import jwt from'jsonwebtoken'
+ import jwttoken from'../sevice/jwttoken'
 import product_crud from '../sevice/product_crud'
 import orders_crud from '../sevice/order_crud'
-
-import res from "express/lib/response";
+import userservice from'../sevice/userservice'
+ 
 let gethomepage =  async(req,res) => {
-    try {
-        let data1 = await db.User.findAll(); 
-        let data2 = await db.Allcode.findAll(); 
+    console.log(req.query.iduser)
+    let userdata = await userservice.getuserbyid(req.query.iduser)
+   
+    let token =   jwttoken.createjwttoken(userdata)
+    
+    let productlist = await product_crud.getAllProduct()
+    res.render('pages/Shopping.ejs',{
+        id:req.query.iduser,
+        token :token,
+        productlist :productlist
 
-        return res.render('homepage.ejs',{
-            data1:JSON.stringify(data1) ,
-            data2:JSON.stringify(data2)
-        })
-    }catch(e) {
-        console.log(e)
-    }
-    //return res.render('homepage.ejs')
+    })
+ 
 
 }
 let getpersonalpage =(req,res) => {
@@ -123,7 +124,7 @@ let handlelogin = (req,res)=>{
 let AI =   (req,res)=>{
     res.render('AI.ejs')
 }
-
+ 
 
 module.exports = {
     AI:AI,

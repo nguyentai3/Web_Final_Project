@@ -34,7 +34,7 @@ let cartofuser = async (req,res)=> {
 }
 
 let addproducttocart = async (req,res) =>{
-    
+     
     if (req.body.idproduct) {
         if (req.body.idproduct && req.body.amount >0 ) {
             let neworder = {
@@ -165,7 +165,7 @@ let search = async(req,res)=>{
 let confirmorder = async(req,res)=>{
      
     let a=  await ordercrud.confirmorder(req.body.iduser)
-    console.log("asds    ",a)
+     
     let productlist = await ordercrud.showAllProductInCart(req.body.iduser)
              
     let total =  await  ordercrud.totalcost(productlist)
@@ -174,14 +174,29 @@ let confirmorder = async(req,res)=>{
        message:"them vao vo hang",
        productlist:productlist ,
        total:total
+
+       getuserbyid
    })*/
-   let result = await ordercrud.productlistofcart(productlist)
-   res.render("pages/Cart.ejs",{
-       message:"them vao vo hang",
-       iduser:req.body.iduser,
-       productlist:result ,
-       total:total
-   })
+    let userdata = await usercrud.getuserbyid(req.body.iduser) 
+ 
+    let token = await jwttoken.createjwttoken(userdata)
+    let productlist1 = await producCrud.getAllProduct()
+    
+   if (userdata.dataValues.roleid ==='USER') {
+       return res.render('pages/Shopping.ejs',{
+           id:userdata.dataValues.id,
+           token :token,
+           productlist :productlist1
+   
+       })
+   } else { let result = await ordercrud.productlistofcart(productlist)
+    res.render("pages/Cart.ejs",{
+        message:"them vao vo hang",
+        iduser:req.body.iduser,
+        productlist:result ,
+        total:total
+    })}
+  
     
 }
  

@@ -100,7 +100,7 @@ let searchorder = async (req,res)=>{
     })
 }
 
-
+//CRUD
 let creatproductpage = async(req,res)=>{
     res.render("pages/Createproduct.ejs")
 }

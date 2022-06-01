@@ -51,7 +51,7 @@ let initwebroute = (app) =>{
        
     router.post("/api/searchproductbyname",ordercontroller.search)
 
-    router.post("/api/addproducttocart",auth.authenloginuser,ordercontroller.addproducttocart)
+    router.post("/api/addproducttocart"/*,auth.authenloginuser*/,ordercontroller.addproducttocart)
 
     router.post("/api/crud/signin",usercontroller.handlesignin)
 
@@ -95,7 +95,7 @@ let initwebroute = (app) =>{
 
     router.post("/amid/uploadimage",admincontroller.handleupload)
 
-
+    router.get("/api/user/homepage",homepage.gethomepage)
 
     return app.use("/",router);
 }
