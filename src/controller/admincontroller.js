@@ -92,6 +92,8 @@ let searchorder = async (req,res)=>{
      
     let order = await orders_crud.findorderbyiduser(req.body.iduser)
 
+   
+
     res.render("pages/Admin_order.ejs",{
  
  

@@ -325,7 +325,9 @@ let confirmorder = async (iduser)=>{
     })
 }
 
- 
+let findAllconfirmorderbyuserid = async (iduser)=>{
+     
+}
 
 module.exports = {
     showAllorders:showAllorders,

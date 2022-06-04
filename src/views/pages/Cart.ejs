@@ -26,7 +26,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="http://localhost:8080/api/login">Login</a>        </li>
+          <a class="nav-link" href="http://localhost:8080">Login</a>        </li>
          
    
         <li class="nav-item">
@@ -39,10 +39,10 @@
     <h1>Total cost <%=total%>  Id user <%=iduser%></h1>
     <form action="/api/user/cart/confirm" method="post">
         <input value="<%=iduser%>" name="iduser" type="text"  style="display:none"/>
-
+      
        <input  value="Confirm" type="submit" class="btn-delete" />
-</form>
- 
+    </form>
+    
  
     <% for (var i = 0;i<productlist.length;i++) { %>
         <div class="card" style="width: 18rem;">

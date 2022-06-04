@@ -10,8 +10,8 @@ let router = express.Router();
 let initwebroute = (app) =>{
  
     router.get("/personalpage",homepage.getpersonalpage)
-    
-    router.get("/crud/create",homepage.crud)
+        
+    router.get("/crud/create",homepage.crud)    
 
     router.post("/crud/post",homepage.crudprocesssingin)
 
@@ -26,7 +26,7 @@ let initwebroute = (app) =>{
     ///crud/delete?id=<%= datatable[i].id%>
     router.get("/crud/delete",homepage.deleteuserbyid)
 
-    router.get("/api/login",usercontroller.loginpage)
+    router.get("/",usercontroller.loginpage)
     
     router.post("/api/handlelogin",usercontroller.handlelogin)
 
@@ -59,6 +59,8 @@ let initwebroute = (app) =>{
 
     router.get("/login",homepage.handlelogin)
 
+
+    router.post("/api/user/cart/payment",usercontroller.paypages)
 
     router.get("/api/admin/user",admincontroller.displayalluser)
 
@@ -96,6 +98,9 @@ let initwebroute = (app) =>{
     router.post("/amid/uploadimage",admincontroller.handleupload)
 
     router.get("/api/user/homepage",homepage.gethomepage)
+
+ 
+
 
     return app.use("/",router);
 }
