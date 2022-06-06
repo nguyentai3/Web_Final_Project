@@ -2,39 +2,43 @@ body{
     text-transform: capitalize;
     word-spacing: 1px;
     font-family:Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
+  
    }
-   th{
+   .form-group.col-md-6 th{ 
     text-transform: uppercase;
     text-align: center;
-    background-color: brown;
+    background-color: rgb(74, 131, 153);
    }
-    h1{
+    .form-group.col-md-6 h1{
         color: whitesmoke;
-        text-shadow: 6px 1px 6px #131d72;
+        text-shadow: 5px 1px 6px #130d0d;
         text-decoration: none;
         padding:10px 20px;
         
     }
-    table {
+    .table.table-bordered table {
         width: 600px ;
         
-    }
-    table, td, th {
+    } 
+    .table.table-bordered table, td, th {
         border-bottom: 1px solid #333;
     }
-     td,th {
+    .table.table-bordered td,th {
          padding: 6px 10px;
          text-align: center;
      }
-     td {
+     .table.table-bordered td {
          color:#333;
      }
      .table.table-bordered {
          background:rgb(228, 181, 51);
-         color:#fff; margin-right: auto; 
-         margin-left: auto; 
+         color:#fff;
+          margin-right: auto; 
+                 margin-left: auto; 
+
      }
-     .table.table-bordered tbody tr:hover {
+     .table.table-bordered tr:hover {
         background: rgb(247, 242, 242);
 
     }
