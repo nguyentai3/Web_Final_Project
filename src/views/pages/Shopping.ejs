@@ -48,6 +48,7 @@ body {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  text-align: center;
 }
 
 .flip-card-front {
@@ -59,12 +60,14 @@ body {
   background-color: #2980b9;
   color: white;
   transform: rotateY(180deg);
+
 }
+ 
 
 
 </style>
     </style>
-        <title>Shopping</title>
+        <title>Chau Shop</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -81,20 +84,10 @@ body {
         <li class="nav-item">
           <a class="nav-link" href="http://localhost:8080/api/shopping/cartofuserbyid?iduser=<%=id%>" >Cart</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link" href="http://localhost:8080/api/user/chatwithadmin?id=<%=id%>" >Help</a>
         </li>
+    
       </ul>
       <form class="form-inline my-2 my-lg-0" action="/api/searchproductbyname" method="post">
         <input type="text" name="iduser" value="<%=id%>" style="display:none" />
@@ -106,42 +99,57 @@ body {
   </nav>
     
         <h1>Shopping</h1>
-      <div style="text-align: center" >
-          <div>
-            <input name="id" value="<%=id%>" readonly>
-
+      <div style="text-align: left" >
+          <div  >
+           <h3>Hello <%=name%> </h3> 
           </div>
 
           
           <div style="text-align: center"> 
-            <div>
+            <div class="flex-center" style="text-align: center">
               
               <%
               for (var i=0;i<productlist.length;i++) {%>
-                
-                 
-                  <div class="flip-card" style="margin-top: 100px;text-align: center">
-                      <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h2><%=productlist[i].dataValues.nameproduct%></h2>
-                            <img src="/<%=productlist[i].dataValues.id%>.jpeg"  width="160"height="250" >
+                  <table class ='table ' style="border:none">
+                    <tr>
+                     <td style="border:none"></td>
+                     <td style="border:none"></td>
+                     <td style="border:none"></td>
+                   
+                     <td style="border:none"></td>
+                     <td style="border:none"></td>
+                      
+                     <td style="border:none">               
+                        <div class="flip-card"  style="margin-top: 100px;text-align: center">
+                          <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h2><%=productlist[i].dataValues.nameproduct%></h2>
+                                <img src="/<%=productlist[i].dataValues.id%>.jpeg"  width="160"height="250" >
+                            </div>
+                            <div class="flip-card-back">
+                              <form action="/api/addproducttocart" method="post" >
+                              <input type="text" name="iduser" value="<%=id%>" style="display:none" />
+                              <input type="text" name="token" value="<%=token%>" style="display:none" />
+      
+                              <input type="text" name="idproduct" value="<%=productlist[i].dataValues.id%>" style="display:none"> </input>
+                              <p>Name <%=productlist[i].dataValues.nameproduct%></p>
+                              <p>Cost <%=productlist[i].dataValues.cost%> $</p>
+                              <p>Descriptton <%=productlist[i].dataValues.description%></p>
+                               <input type="number" id="quanlity"  name = 'amount'><br/>
+                              <input type="submit" value="add to cart">
+                            </form>
+                            </div>
+                          </div>
                         </div>
-                        <div class="flip-card-back">
-                          <form action="/api/addproducttocart" method="post" >
-                          <input type="text" name="iduser" value="<%=id%>" style="display:none" />
-                          <input type="text" name="token" value="<%=token%>" style="display:none" />
+                          </td>
 
-                          <input type="text" name="idproduct" value="<%=productlist[i].dataValues.id%>" style="display:none"> </input>
-                          <p>Name <%=productlist[i].dataValues.nameproduct%></p>
-                          <p>Cost <%=productlist[i].dataValues.cost%> $</p>
-                          <p>Descriptton <%=productlist[i].dataValues.description%></p>
-                           <input type="number" id="quanlity"  name = 'amount'><br/>
-                          <input type="submit" value="add to cart">
-                        </form>
-                        </div>
-                      </div>
-                    </div>
-    
+                     
+                 
+                    </tr>
+                  </table>
+            
+                 
+                 
            <%   }
           %>
             

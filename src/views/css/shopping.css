@@ -1,6 +1,11 @@
-         
+     * {
+      background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
+
+      }   
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+  
   }
   
   .flip-card {
@@ -41,4 +46,19 @@ body {
     background-color: #2980b9;
     color: white;
     transform: rotateY(180deg);
+  }
+
+
+  .flex-center{
+    display: flex;
+  justify-content: center;
+  }
+
+  div {
+    padding: 15px;
+    max-width: 125px;
+    margin: 5px;
+  }
+  td{
+    border:none
   }

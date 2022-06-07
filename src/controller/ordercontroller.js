@@ -17,7 +17,7 @@ let showitem = async(req,res)=>{
     let user = await usercrud.getuserbyid(req.body.iduser)
 
     let token = await jwttoken.createjwttoken(user)
-    console.log(token)
+     
     res.status(200).json({
         message:"sản phẩm hiện có",
         productList:productlist,
@@ -58,11 +58,14 @@ let addproducttocart = async (req,res) =>{
                 total:total
             })*/
             let result = await ordercrud.productlistofcart(productlist)
+            console.log("cart   ",result)
+            console.log("product  ",productlist)
             res.render("pages/Cart.ejs",{
                 message:"them vao vo hang",
                 iduser:req.body.iduser,
                 productlist:result ,
                 total:total
+                
             }) 
         }   else {
             var date = new Date()
@@ -110,7 +113,7 @@ let cartofuserbyid = async(req,res)=>{
         productlist:productlist ,
         total:total
     })*/
-     
+  
     res.render("pages/Cartofuser.ejs",{
 
         message:"them vao vo hang",
@@ -146,17 +149,21 @@ let allProductInCart = async (req,res)=>{
 let search = async(req,res)=>{
      
         let product = await producCrud.findProductbyName(req.body.nameproduct)
-        
-    
-         
-    
         const decode = jwt.decode(req.body.token)
-    
+        console.log(decode)
+
+        let user = await db.User.findOne({
+            where:{
+                email:decode.userdata.email
+            }
+        })
+        console.log(user)
+        
         return res.render('pages/Shopping.ejs',{
-            id:decode.userdata.user.id,
-            token :req.body.token,
-            productlist :product
-    
+            id:decode.userdata.id,
+            token :req.body.token,  
+            productlist :product,
+            name:user.dataValues.firstname
         })
      
    
@@ -181,15 +188,22 @@ let confirmorder = async(req,res)=>{
  
     let token = await jwttoken.createjwttoken(userdata)
     let productlist1 = await producCrud.getAllProduct()
-    
+    let user = await db.User.findOne({
+        where:{
+            id:req.body.iduser
+        }
+    })
+    console.log("asdsa    ",user)
    if (userdata.dataValues.roleid ==='USER') {
        return res.render('pages/Shopping.ejs',{
            id:userdata.dataValues.id,
            token :token,
-           productlist :productlist1
-   
+           productlist :productlist1,
+            name:user.dataValues.firstname
        })
-   } else { let result = await ordercrud.productlistofcart(productlist)
+   } else { 
+    let result = await ordercrud.productlistofcart(productlist)
+    console.log("result  ",result)
     res.render("pages/Cart.ejs",{
         message:"them vao vo hang",
         iduser:req.body.iduser,

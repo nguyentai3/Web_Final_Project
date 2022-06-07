@@ -38,12 +38,8 @@ let updateProduct = async (req,res)=>{
 
 }
 
-
 let displayalluser = async (req,res)=>{
     let list = await crudservice.showAllUser();
-    
-    
-
     
      res.render("pages/Admin_user.ejs",{
         datatable:list,
@@ -139,7 +135,7 @@ let updateproductpage = async (req,res,next)=>{
             id:req.query.idproduct
         }
     })
-    console.log(product)
+     
     res.render('pages/Updateproductpage.ejs',{
          
         product: product

@@ -60,7 +60,7 @@ let initwebroute = (app) =>{
     router.get("/login",homepage.handlelogin)
 
 
-    router.post("/api/user/cart/payment",usercontroller.paypages)
+    router.get("/api/user/cart/payment",usercontroller.paypages)
 
     router.get("/api/admin/user",admincontroller.displayalluser)
 
@@ -77,7 +77,7 @@ let initwebroute = (app) =>{
     router.post("/api/handlecreateproduct" , admincontroller.handlecreateproduct)
 
  
-    router.get("/api/admin/updateproduct")
+    //router.get("/api/admin/updateproduct")
     router.get("/api/user/cart/cancle",usercontroller.cancleorer)
  
 
@@ -99,7 +99,15 @@ let initwebroute = (app) =>{
 
     router.get("/api/user/homepage",homepage.gethomepage)
 
- 
+    router.post("/api/user/paypal",usercontroller.pay)
+
+    router.get("/api/user/paypage",usercontroller.paypages)
+
+    router.post("/api/user/zalopay",usercontroller.pay)
+
+    router.post("/api/user/handlepayment",usercontroller.handlepayment)
+
+    router.get('/api/user/chatwithadmin',usercontroller.chatrealtimepage)
 
 
     return app.use("/",router);

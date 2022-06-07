@@ -7,6 +7,7 @@
     "dialect": "mysql",
     "logging":false
   },
+  
   "test": {
     "username": "root",
     "password": null,
@@ -20,5 +21,28 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
+  },
+  "appid": "553",
+  "key1": "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q",
+  "key2": "Iyz2habzyr7AG8SgvoBCbKwKi3UzlLi3",
+  "ngrok": {
+    "tunnels": "http://localhost:4040/api/tunnels"
+  },
+  "api": {
+    "createorder": "https://sandbox.zalopay.com.vn/v001/tpe/createorder",
+    "gateway": "https://sbgateway.zalopay.vn/pay?order=",
+    "quickpay": "https://sandbox.zalopay.com.vn/v001/tpe/submitqrcodepay",
+    "refund": "https://sandbox.zalopay.com.vn/v001/tpe/partialrefund",
+    "getrefundstatus": "https://sandbox.zalopay.com.vn/v001/tpe/getpartialrefundstatus",
+    "getorderstatus": "https://sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid",
+    "getbanklist": "https://sbgateway.zalopay.vn/api/getlistmerchantbanks"
+  },
+  "facebook":{
+    "facebook_api_key"      :     "1403551446830630",
+  "facebook_api_secret"   :     "5f4f8da6de03a2b35ca1cd6d60c4ae3a",
+  "callback_url"          :     "http://localhost:8080/auth/facebook/callback"
+ 
   }
+
+
 }

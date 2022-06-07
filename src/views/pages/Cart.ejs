@@ -29,9 +29,7 @@
           <a class="nav-link" href="http://localhost:8080">Login</a>        </li>
          
    
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+      
       </ul>
        
     </div>
@@ -43,11 +41,11 @@
        <input  value="Confirm" type="submit" class="btn-delete" />
     </form>
     
- 
+    
     <% for (var i = 0;i<productlist.length;i++) { %>
         <div class="card" style="width: 18rem;">
-            <div style="text-align:center">Id <%=productlist[i].id%></div>
-            
+            <div style="text-align:center">Id <%=productlist[i].idproduct%></div>
+            <img class="card-img-top" src="/<%=productlist[i].idproduct%>.jpeg"  width="160"height="250">
             <div class="card-body">
               <h5 class="card-title"> Name  <%=productlist[i].Name%></h5>
               <h5 class="card-title">  cost   <%=productlist[i].cost%></h5>

@@ -12,13 +12,13 @@ let gethomepage =  async(req,res) => {
     let userdata = await userservice.getuserbyid(req.query.iduser)
    
     let token =   jwttoken.createjwttoken(userdata)
-    
+     
     let productlist = await product_crud.getAllProduct()
     res.render('pages/Shopping.ejs',{
         id:req.query.iduser,
         token :token,
-        productlist :productlist
-
+        productlist :productlist,
+        name:userdata.dataValues.firstname
     })
  
 

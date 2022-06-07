@@ -231,6 +231,7 @@ let productlistofcart =async (order) =>{
                  
                 result.push({
                     id:order[i].dataValues.id,
+                    idproduct:product.dataValues.id,
                     iduser:order[i].dataValues.iduser,
                     Name: product.dataValues.nameproduct,
                     cost:(order[i].dataValues.amount *product.dataValues.cost).toFixed(2),

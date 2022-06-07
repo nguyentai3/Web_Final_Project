@@ -1,0 +1,48 @@
+body{
+    text-transform: capitalize;
+    word-spacing: 1px;
+    font-family:Arial, Helvetica, sans-serif;
+   }
+   th{
+    text-transform: uppercase;
+    text-align: center;
+    background-color: brown;
+   }
+    h1{
+        color: whitesmoke;
+        text-shadow: 6px 1px 6px #580b97;
+        text-decoration: none;
+        padding:10px 20px;
+        
+    }
+    table {
+        width: 600px ;
+        
+    }
+    table, td, th {
+        border-bottom: 1px solid #333;
+    }
+     td,th {
+         padding: 6px 10px;
+         text-align: center;
+     }
+     td {
+         color:#333;
+     }
+     .table.table-bordered {
+         background:rgb(228, 181, 51);
+         color:#fff;
+         margin-right: auto; 
+         margin-left: auto; 
+
+     }
+     .table.table-bordered tbody tr:nth-child(odd) {
+        background: rgb(247, 242, 242);
+
+    }
+   .table.table-bordered a {
+        background: #FFF;
+        border: 1px solid #55c65e;
+        color: #48b151;
+        font-weight: normal;
+    }

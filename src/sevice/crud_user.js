@@ -8,19 +8,32 @@ import db from"../models/index";
 
         try {
             let password1 = await hashpassword(data.password)
-            let newuser= await db.User.create({
-                email: data.email,
-                firstname:  data.firstname,
-                lastname:  data.lastname,
-                password:password1,
-                address:  data.address,
-                gender: data.gender === '1' ? true:false,
-                phone: data.phone,
-                roleid:  "USER"
-                
-            }) 
-             
-            resovle(newuser)
+            let email = await db.User.findOne({
+                where:{
+                    email:data.email
+                }
+            })
+            if (email) {
+                resovle({messgage:"Email has exited"})
+            } else {
+                let newuser= await db.User.create({
+                    email: data.email,
+                    firstname:  data.firstname,
+                    lastname:  data.lastname,
+                    password:password1,
+                    address:  data.address,
+                    gender: data.gender === '1' ? true:false,
+                    phone: data.phone,
+                    roleid:  "USER"
+                    
+                }) 
+                 
+                resovle({
+                    data:newuser,
+                    message:'success'
+                })
+            }
+           
         }catch(e) {
             reject(e)
         }
