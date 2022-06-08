@@ -56,6 +56,20 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                System Design Specification:
+                <ul>
+                    <li>Use-case Diagram</li>
+                    <img src="https://user-images.githubusercontent.com/74531167/172628440-e110b4e1-4105-45da-95af-8d85d7472e87.PNG"/>
+                    <li>
+                        Sequence Diagram:
+                           <img src ="https://user-images.githubusercontent.com/74531167/172635113-01b42e8e-6db8-4bd4-bf41-102f1faaece9.PNG"/>    
+                            <img src="https://user-images.githubusercontent.com/74531167/172636292-0c3f2962-de56-497e-b960-3c9901b8bf22.PNG"/>
+                        <ul>
+                        </ul>
+                    </li>
+                </ul>
+            </li>            
         </ol>
     </body>
   
