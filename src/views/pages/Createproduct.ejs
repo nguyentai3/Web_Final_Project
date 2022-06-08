@@ -102,21 +102,27 @@ body {
   </nav>
  <h1 style="color:white">Create product</h1>
         <form action="/api/handlecreateproduct" method="post"   > 
+         <table class="table">
+       
          
-          <div>
-            Name  <input type="text" name="nameproduct" placeholder="Name product" />
-          </div>
-          <div>
-            Quantity <input type="number" name="quantity" placeholder="Quantity" />
-          </div> <div>
-            Cost   <input type="text" name="cost" placeholder="cost per one" />
-          </div>
-          Decription  <input type="text" name="description" placeholder="Description"  />
-           <div>
-             
+          <tr>
+            <td>Name  <input type="text" name="nameproduct" placeholder="Name product" /></td>
+          </tr>
+          <tr>
+            <td>Quantity <input type="number" name="quantity" placeholder="Quantity" /></td>  
+          </tr> 
+          <tr><td> Cost   <input type="text" name="cost" placeholder="cost per one" /></td> 
+           
+          </tr>
+          <tr><td> Decription  <input type="text" name="description" placeholder="Description"  /></td> 
+         
+          </tr>
+             <tr>
+              <button type="submit" class="btn btn-primary">Create</button>
 
-            <button type="submit" class="btn btn-primary">Sign in</button>
+             </tr>
 
+          </table>
         </form>
 
 </body>
