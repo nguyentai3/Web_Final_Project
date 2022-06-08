@@ -65,6 +65,7 @@
                         Sequence Diagram:
                            <img src ="https://user-images.githubusercontent.com/74531167/172635113-01b42e8e-6db8-4bd4-bf41-102f1faaece9.PNG"/>    
                             <img src="https://user-images.githubusercontent.com/74531167/172636292-0c3f2962-de56-497e-b960-3c9901b8bf22.PNG"/>
+                            <img  src="https://user-images.githubusercontent.com/74531167/172653216-4366ad44-3659-486d-9c9e-52cf610a245d.PNG"/>
                         <ul>
                         </ul>
                     </li>
