@@ -61,6 +61,7 @@
                 <ul>
                     <li>Use-case Diagram</li>
                     <img src="https://user-images.githubusercontent.com/74531167/172628440-e110b4e1-4105-45da-95af-8d85d7472e87.PNG"/>
+                    <img src="https://user-images.githubusercontent.com/74531167/172654398-2cedefe3-ae3d-4ab4-a535-53db4c7df8db.PNG" />
                     <li>
                         Sequence Diagram:
                            <img src ="https://user-images.githubusercontent.com/74531167/172635113-01b42e8e-6db8-4bd4-bf41-102f1faaece9.PNG"/>    
@@ -68,6 +69,11 @@
                             <img  src="https://user-images.githubusercontent.com/74531167/172653216-4366ad44-3659-486d-9c9e-52cf610a245d.PNG"/>
                         <ul>
                         </ul>
+                    </li>
+                    <li>
+                        Activity Diagram
+                        <img src="https://user-images.githubusercontent.com/74531167/172656830-ed144494-2b8a-4e3b-9ed7-722abe86d693.PNG"/>
+                        <img src="https://user-images.githubusercontent.com/74531167/172659748-1f6d1610-9e73-491b-a4ee-618d080ad826.PNG"/>
                     </li>
                 </ul>
             </li>            
