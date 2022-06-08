@@ -37,6 +37,26 @@
             </li>
         </ol>
         <h2>CHAPTER III: SYSTEM DESIGN</h2>
+        <ol>
+            <li>
+                System Requirement Specification
+                <ul>
+                    <li> Functional Requirements: 
+                        <ul>
+                            <li>Nodejs : Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser</li>
+                            <li>Sequelize : Sequelize is a modern TypeScript and Node.js ORM for Postgres, MySQL, MariaDB, SQLite and SQL Server, and more</li>
+                            <li>MySql : MySQL is an open-source relational database management system</li>
+                            <li>Express : Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications</li>         </ul>
+                    </li>
+                    <li>Requirements Analysis
+                        <ul>
+                            <li>User requirement : Users need a simple , effective shopping website: easy to interact with, simple to operate but statisfy their requirements</li>
+                            <li>Admin requirements : The web must provide enough features for inventory management and users. Its performance should be strong with an easy to use interface. </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ol>
     </body>
   
 </html>
