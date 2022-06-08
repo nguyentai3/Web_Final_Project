@@ -25,8 +25,11 @@
                 <ul>
                     <li><h2>Tài</h2>/li>
             <li>Tiki</li>
+                    <a href="https://tiki.vn/">Tiki</a>
             <li>Shopee</li>
+                    <a href="https://shopee.vn/">Shopee</a>
             <li>Lazada</li>
+                    <a href="https://www.lazada.vn/">Lazada</a>
                 </ul>
             </li>
             <li>Platform and Tool Review
