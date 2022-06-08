@@ -24,6 +24,9 @@
             <li>Similiar Applications
                 <ul>
                     <li><h2>Tài</h2>/li>
+            <li>Tiki</li>
+            <li>Shopee</li>
+            <li>Lazada</li>
                 </ul>
             </li>
             <li>Platform and Tool Review
