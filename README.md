@@ -86,9 +86,7 @@
             <li>Connect the buyer and the seller.</li>
             <h3>Strengh and Weakness</h3>
             The challenging necessity of web commercial development is to make the web attractive and secure for buyers and sellers while purchasing and logging in
-           
- 
-            </ul>     
+                     </ul>     
     </body>
   
 </html>
