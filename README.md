@@ -87,6 +87,10 @@
             <h3>Strengh and Weakness</h3>
             The challenging necessity of web commercial development is to make the web attractive and secure for buyers and sellers while purchasing and logging in
                      </ul>     
+            <h2>Reference</h2>
+            https://www.w3schools.com/nodejs/nodejs_intro.asp
+            https://www.loginradius.com/blog/engineering/guest-post/nodejs-authentication-guide/
+            https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security
     </body>
   
 </html>
