@@ -23,7 +23,7 @@
         <ol>
             <li>Similiar Applications
                 <ul>
-                    <li></li>
+                    <h1>
             <li>Tiki:<a href="https://tiki.vn/">Tiki</a></li>
             <li>Shopee:<a href="https://shopee.vn/">Shopee</a></li>
             <li>Lazada:<a href="https://www.lazada.vn/">Lazada</a></li>
@@ -81,10 +81,9 @@
           <h2>CONCLUSION AND DISCUSSION</h2>
         <ol>
             <ul>
-            <li>A page should be connected to the API system.</li>
+            <li>Connect mysql nodejs Sequelize .</li>
             <li>The HTTP protocol is used by the client to communicate with the server.</li>
             <li>Connect the buyer and the seller.</li>
-            </ul>
             <h3>Strengh and Weakness</h3>
             The challenging necessity of web commercial development is to make the web attractive and secure for buyers and sellers while purchasing and logging in
            
