@@ -91,6 +91,9 @@
             https://www.w3schools.com/nodejs/nodejs_intro.asp
             https://www.loginradius.com/blog/engineering/guest-post/nodejs-authentication-guide/
             https://github.com/nodejs/node/blob/HEAD/SECURITY.md#security
+            https://getbootstrap.com/ 
+            https://stackoverflow.com/ 
+            https://reactjs.org/
     </body>
   
 </html>
